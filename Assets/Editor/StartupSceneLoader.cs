@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-[InitializeOnLoad]
+// [InitializeOnLoad]
 public static class StartupSceneLoader
 {
     static StartupSceneLoader()
