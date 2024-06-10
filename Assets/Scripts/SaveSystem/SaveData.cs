@@ -11,8 +11,10 @@ public class SaveData
 
     public static SaveData Of(params (string key, object value)[] keyValuePairs)
     {
-        SaveData saveData = new SaveData();
-        saveData.data = new Dictionary<string, object>();
+        SaveData saveData = new SaveData
+        {
+            data = new Dictionary<string, object>()
+        };
         foreach (var pair in keyValuePairs)
         {
             saveData.data.Add(pair.key, pair.value);
