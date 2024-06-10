@@ -10,20 +10,22 @@ public class SaveManager : MonoBehaviour
 {
     private static SaveManager instance;
     private IEnumerable<ISaveable> saveables;
-    private static string path = Application.persistentDataPath + "/gamesave";
-    private static BinaryFormatter formatter = new BinaryFormatter();
-
+    private string path;
+    private BinaryFormatter formatter = new BinaryFormatter();
 
     [Header("References")]
     [SerializeField] private float saveFrequency = 60f * 5f; // Default to 5 minutes
 
     private void Start()
     {
+        path = Application.persistentDataPath + "/gamesave";
+        Debug.Log("Save path is :" + path);
         // Find and register saveables. Very expensive but should only happen on start.
         RegisterSaveables();
 
         // Start the periodic saving
-        InvokeRepeating(nameof(ScheduleSerializeSaveables), saveFrequency, saveFrequency);
+        InvokeRepeating(nameof(ScheduleSerializeSaveables), 0, saveFrequency);
+
     }
 
     public static SaveManager Instance
@@ -52,9 +54,11 @@ public class SaveManager : MonoBehaviour
 
     private async Task SerializeSaveables()
     {
+        Debug.Log("Saving initiating...");
         List<SaveData> saveData = new List<SaveData>();
         foreach (ISaveable saveable in saveables)
         {
+            Debug.Log("Registered saveable");
             saveData.Add(saveable.Save());
         }
         SaveDataContainer container = new SaveDataContainer { SaveData = saveData };
@@ -65,6 +69,7 @@ public class SaveManager : MonoBehaviour
             {
                 formatter.Serialize(fileStream, container);
             }
+            Debug.Log("Saving complete...");
         });
     }
 
