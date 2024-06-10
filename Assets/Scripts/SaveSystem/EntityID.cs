@@ -5,7 +5,8 @@ public class EntityID : MonoBehaviour
 {
     [SerializeField] private string uniqueID;
 
-    // Start is called before the first frame update
+    public string UniqueID => uniqueID;
+
     void Start()
     {
         // Check if the unique ID has not been generated yet

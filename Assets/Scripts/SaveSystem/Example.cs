@@ -8,6 +8,8 @@ public class Example : MonoBehaviour, ISaveable
     private int exampleCount = 2;
     private int exampleSize = 500;
 
+    [SerializeField] private EntityID entityID;
+
     public void Load(SaveData saveData)
     {
         exampleCount = saveData.GetData<int>("exampleCount");
@@ -17,6 +19,7 @@ public class Example : MonoBehaviour, ISaveable
     public SaveData Save()
     {
         return SaveData.Of(
+            entityID.UniqueID,
             ("exampleCount", exampleCount),
             ("exampleSize", exampleSize)
         );

@@ -9,7 +9,7 @@ public class SaveData
 
     private Dictionary<string, object> data;
 
-    public static SaveData Of(params (string key, object value)[] keyValuePairs)
+    public static SaveData Of(string entityID, params (string key, object value)[] keyValuePairs)
     {
         SaveData saveData = new SaveData
         {
