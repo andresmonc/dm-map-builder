@@ -7,12 +7,14 @@ using UnityEngine;
 public class SaveData
 {
 
+    public string EntityID { get; private set; }
     private Dictionary<string, object> data;
 
     public static SaveData Of(string entityID, params (string key, object value)[] keyValuePairs)
     {
         SaveData saveData = new SaveData
         {
+            EntityID = entityID,
             data = new Dictionary<string, object>()
         };
         foreach (var pair in keyValuePairs)
