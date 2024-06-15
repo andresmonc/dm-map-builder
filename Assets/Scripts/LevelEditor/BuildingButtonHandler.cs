@@ -8,12 +8,12 @@ public class BuildingButtonHandler : MonoBehaviour
     [SerializeField] BuildingObjectBase item;
     private Button button;
 
-    private BuildingCreator buildingCreator;
+    private TileMapEditor buildingCreator;
     private void Awake()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(ButtonClicked);
-        buildingCreator = BuildingCreator.GetInstance();
+        buildingCreator = TileMapEditor.GetInstance();
     }
 
 

@@ -807,6 +807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewMap: {fileID: 1168526225}
   defaultMap: {fileID: 1561107492}
+  inputReader: {fileID: 11400000, guid: c895532b97b26704a979d302912a2329, type: 2}
 --- !u!4 &878602931
 Transform:
   m_ObjectHideFlags: 0

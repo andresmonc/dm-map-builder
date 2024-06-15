@@ -4,11 +4,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
-public class BuildingCreator : Singleton<BuildingCreator>
+public class TileMapEditor : Singleton<TileMapEditor>
 {
     [SerializeField] Tilemap previewMap, defaultMap;
+
+    [SerializeField] private LevelEditorInputReader inputReader;
+
     TileBase tileBase;
-    Controls controls;
     Vector2 mousePos;
 
     Vector3Int currentGridPos;
@@ -40,6 +42,8 @@ public class BuildingCreator : Singleton<BuildingCreator>
     {
         // if nothing is selected - show preview
         if (SelectedObject == null) { return; }
+        // Get mouse position from input reader
+        mousePos = inputReader.MousePosition;
         Vector3 pos = _camera.ScreenToWorldPoint(mousePos);
         Vector3Int gridPos = previewMap.WorldToCell(pos);
         if (gridPos != currentGridPos)
@@ -51,50 +55,34 @@ public class BuildingCreator : Singleton<BuildingCreator>
         isPosOverGameObject = EventSystem.current.IsPointerOverGameObject();
     }
 
-    // MOVE TO INPUTREADER :l
     private void OnEnable()
     {
-        if (controls == null)
-        {
-            controls = new Controls();
-        }
-        controls.LevelEditorPlayer.Enable();
-        Debug.Log("Subscribing to changes!");
-        controls.LevelEditorPlayer.MousePosition.performed += HandleMouseMove;
-        controls.LevelEditorPlayer.MouseLeftClick.performed += HandleMouseLeftClick;
-        controls.LevelEditorPlayer.MouseRightClick.performed += HandleMouseRightClick;
+        inputReader.LeftClickEvent += HandleMouseLeftClick;
+        inputReader.RightClickEvent += HandleMouseRightClick;
 
     }
 
     private void OnDisable()
     {
-        Debug.Log("Unsubscribing to changes!");
-        controls.LevelEditorPlayer.MousePosition.performed -= HandleMouseMove;
-        controls.LevelEditorPlayer.MouseLeftClick.performed -= HandleMouseLeftClick;
-        controls.LevelEditorPlayer.MouseRightClick.performed -= HandleMouseRightClick;
+        inputReader.LeftClickEvent -= HandleMouseLeftClick;
+        inputReader.RightClickEvent -= HandleMouseRightClick;
     }
 
-
-    private void HandleMouseRightClick(InputAction.CallbackContext context)
+    private void HandleMouseRightClick(bool click)
     {
-        if (selectedObject == null) { return; }
+        if (selectedObject == null || !click) { return; }
         selectedObject = null;
+        previewMap.SetTile(lastGridPosition, null);
+        previewMap.SetTile(currentGridPos, null);
     }
 
-    private void HandleMouseLeftClick(InputAction.CallbackContext context)
+    private void HandleMouseLeftClick(bool click)
     {
-        if (selectedObject != null && !isPosOverGameObject)
+        if (selectedObject != null && !isPosOverGameObject && click)
         {
             HandleDrawing();
         }
     }
-
-    private void HandleMouseMove(InputAction.CallbackContext context)
-    {
-        mousePos = context.ReadValue<Vector2>();
-    }
-
-    // MOVE TO INPUTREADER :l
 
     public void ObjectSelected(BuildingObjectBase obj)
     {
@@ -115,7 +103,6 @@ public class BuildingCreator : Singleton<BuildingCreator>
 
     private void HandleDrawing()
     {
-        Debug.Log("handling drawing!");
         DrawItem();
     }
 
@@ -123,7 +110,5 @@ public class BuildingCreator : Singleton<BuildingCreator>
     {
         defaultMap.SetTile(currentGridPos, tileBase);
     }
-
-
 
 }
