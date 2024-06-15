@@ -20,7 +20,6 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
             controls = new Controls();
         }
         controls.LevelEditorPlayer.Enable();
-        Debug.Log("Subscribing to changes!");
         controls.LevelEditorPlayer.MousePosition.performed += OnMousePosition;
         controls.LevelEditorPlayer.MouseLeftClick.performed += OnMouseLeftClick;
         controls.LevelEditorPlayer.MouseRightClick.performed += OnMouseRightClick;
@@ -29,7 +28,6 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
 
     private void OnDisable()
     {
-        Debug.Log("Unsubscribing to changes!");
         controls.LevelEditorPlayer.MousePosition.performed -= OnMousePosition;
         controls.LevelEditorPlayer.MouseLeftClick.performed -= OnMouseLeftClick;
         controls.LevelEditorPlayer.MouseRightClick.performed -= OnMouseRightClick;
