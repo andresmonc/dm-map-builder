@@ -92,7 +92,6 @@ public class TileMapEditor : Singleton<TileMapEditor>
             if (ctx.phase == InputActionPhase.Started)
             {
                 holdActive = true;
-
                 if (ctx.interaction is TapInteraction)
                 {
                     holdStartPosition = currentGridPos;
@@ -113,10 +112,6 @@ public class TileMapEditor : Singleton<TileMapEditor>
     public void ObjectSelected(BuildingObjectBase obj)
     {
         SelectedObject = obj;
-
-        // set preview where mouse is
-        // on click draw tile on tile map
-        // on right click cancel drawing
     }
 
     private void UpdatePreview()
