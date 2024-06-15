@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.Tilemaps;
 
 public class TileMapEditor : Singleton<TileMapEditor>
@@ -17,9 +18,12 @@ public class TileMapEditor : Singleton<TileMapEditor>
     Vector3Int lastGridPosition;
     Camera _camera;
 
+    bool holdActive = false;
     bool isPosOverGameObject = false;
 
     private BuildingObjectBase selectedObject;
+    private Vector3Int holdStartPosition;
+    BoundsInt bounds;
 
     public BuildingObjectBase SelectedObject
     {
@@ -35,24 +39,29 @@ public class TileMapEditor : Singleton<TileMapEditor>
     {
         base.Awake();
         _camera = Camera.main;
-        Debug.Log("BuildingCreator awoken");
     }
 
     private void Update()
     {
-        // if nothing is selected - show preview
-        if (SelectedObject == null) { return; }
-        // Get mouse position from input reader
-        mousePos = inputReader.MousePosition;
-        Vector3 pos = _camera.ScreenToWorldPoint(mousePos);
-        Vector3Int gridPos = previewMap.WorldToCell(pos);
-        if (gridPos != currentGridPos)
-        {
-            lastGridPosition = currentGridPos;
-            currentGridPos = gridPos;
-            UpdatePreview();
-        }
         isPosOverGameObject = EventSystem.current.IsPointerOverGameObject();
+        // if something is selected - show preview
+        if (selectedObject != null)
+        {
+            mousePos = inputReader.MousePosition;
+            Vector3 pos = _camera.ScreenToWorldPoint(mousePos);
+            Vector3Int gridPos = previewMap.WorldToCell(pos);
+
+            if (gridPos != currentGridPos)
+            {
+                lastGridPosition = currentGridPos;
+                currentGridPos = gridPos;
+                UpdatePreview();
+                if (holdActive)
+                {
+                    HandleDrawing();
+                }
+            }
+        }
     }
 
     private void OnEnable()
@@ -76,11 +85,28 @@ public class TileMapEditor : Singleton<TileMapEditor>
         previewMap.SetTile(currentGridPos, null);
     }
 
-    private void HandleMouseLeftClick(bool click)
+    private void HandleMouseLeftClick(InputAction.CallbackContext ctx)
     {
-        if (selectedObject != null && !isPosOverGameObject && click)
+        if (selectedObject != null && !isPosOverGameObject)
         {
-            HandleDrawing();
+            if (ctx.phase == InputActionPhase.Started)
+            {
+                holdActive = true;
+
+                if (ctx.interaction is TapInteraction)
+                {
+                    holdStartPosition = currentGridPos;
+                }
+                HandleDrawing();
+            }
+            else
+            {
+                if (ctx.interaction is SlowTapInteraction || ctx.interaction is TapInteraction && ctx.phase == InputActionPhase.Performed)
+                {
+                    holdActive = false;
+                    HandleDrawRelease();
+                }
+            }
         }
     }
 
@@ -103,7 +129,83 @@ public class TileMapEditor : Singleton<TileMapEditor>
 
     private void HandleDrawing()
     {
-        DrawItem();
+        switch (selectedObject.PlaceType)
+        {
+            case PlaceType.Single:
+                DrawItem();
+                break;
+            case PlaceType.Line:
+                LineRenderer();
+                break;
+            case PlaceType.Rectangle:
+                RectangleRenderer();
+                break;
+        }
+    }
+
+    private void HandleDrawRelease()
+    {
+        if (selectedObject != null)
+        {
+            switch (selectedObject.PlaceType)
+            {
+                case PlaceType.Line:
+                case PlaceType.Rectangle:
+                    DrawBounds(defaultMap);
+                    previewMap.ClearAllTiles();
+                    break;
+            }
+        }
+    }
+
+    private void RectangleRenderer()
+    {
+        previewMap.ClearAllTiles();
+        bounds.xMin = currentGridPos.x < holdStartPosition.x ? currentGridPos.x : holdStartPosition.x;
+        bounds.xMax = currentGridPos.x > holdStartPosition.x ? currentGridPos.x : holdStartPosition.x;
+        bounds.yMin = currentGridPos.y < holdStartPosition.y ? currentGridPos.y : holdStartPosition.y;
+        bounds.yMax = currentGridPos.y > holdStartPosition.y ? currentGridPos.y : holdStartPosition.y;
+        DrawBounds(previewMap);
+    }
+
+    private void LineRenderer()
+    {
+        Debug.Log("Line renderer working");
+        //  Render Preview on UI Map, draw real one on Release
+        previewMap.ClearAllTiles();
+
+        float diffX = Mathf.Abs(currentGridPos.x - holdStartPosition.x);
+        float diffY = Mathf.Abs(currentGridPos.y - holdStartPosition.y);
+
+        bool lineIsHorizontal = diffX >= diffY;
+
+        if (lineIsHorizontal)
+        {
+            bounds.xMin = currentGridPos.x < holdStartPosition.x ? currentGridPos.x : holdStartPosition.x;
+            bounds.xMax = currentGridPos.x > holdStartPosition.x ? currentGridPos.x : holdStartPosition.x;
+            bounds.yMin = holdStartPosition.y;
+            bounds.yMax = holdStartPosition.y;
+        }
+        else
+        {
+            bounds.xMin = holdStartPosition.x;
+            bounds.xMax = holdStartPosition.x;
+            bounds.yMin = currentGridPos.y < holdStartPosition.y ? currentGridPos.y : holdStartPosition.y;
+            bounds.yMax = currentGridPos.y > holdStartPosition.y ? currentGridPos.y : holdStartPosition.y;
+        }
+        DrawBounds(previewMap);
+    }
+
+    private void DrawBounds(Tilemap map)
+    {
+        // Draws bounds on given map
+        for (int x = bounds.xMin; x <= bounds.xMax; x++)
+        {
+            for (int y = bounds.yMin; y <= bounds.yMax; y++)
+            {
+                map.SetTile(new Vector3Int(x, y, 0), tileBase);
+            }
+        }
     }
 
     private void DrawItem()

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb16de5a2a7d3b43acf790901fc45ac, type: 3}
   m_Name: StoneWall
   m_EditorClassIdentifier: 
-  <Category>k__BackingField: 1
+  <Category>k__BackingField: 0
   <TileBase>k__BackingField: {fileID: 11400000, guid: a4769dc11b48e794884dccadded30976, type: 2}
   <PlaceType>k__BackingField: 1

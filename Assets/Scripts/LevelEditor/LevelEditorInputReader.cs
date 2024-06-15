@@ -8,7 +8,7 @@ using static Controls;
 public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerActions
 {
     Controls controls;
-    public event Action<bool> LeftClickEvent;
+    public event Action<InputAction.CallbackContext> LeftClickEvent;
     public event Action<bool> RightClickEvent;
     public Vector2 MousePosition { get; private set; }
 
@@ -26,12 +26,19 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
 
     public void OnMouseRightClick(InputAction.CallbackContext context)
     {
-        SendClickEvent(context, RightClickEvent);
+        if (context.performed)
+        {
+            RightClickEvent?.Invoke(true);
+        }
+        else if (context.canceled)
+        {
+            RightClickEvent?.Invoke(false);
+        }
     }
 
     public void OnMouseLeftClick(InputAction.CallbackContext context)
     {
-        SendClickEvent(context, LeftClickEvent);
+        LeftClickEvent?.Invoke(context);
     }
 
     public void OnMousePosition(InputAction.CallbackContext context)
@@ -39,17 +46,5 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
         MousePosition = context.ReadValue<Vector2>();
     }
 
-
-    private void SendClickEvent(InputAction.CallbackContext context, Action<bool> clickAction)
-    {
-        if (context.performed)
-        {
-            clickAction?.Invoke(true);
-        }
-        else if (context.canceled)
-        {
-            clickAction?.Invoke(false);
-        }
-    }
 
 }
