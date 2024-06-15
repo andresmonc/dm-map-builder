@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static Controls;
 
-[CreateAssetMenu(fileName = "New Tank Player Input Reader", menuName = "Input/Input Reader")]
+[CreateAssetMenu(fileName = "New Tank Player Input Reader", menuName = "Input/Tank Player Input Reader")]
 public class InputReader : ScriptableObject, IPlayerActions
 {
 

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using static Controls;
 
 
-[CreateAssetMenu(fileName = "New Level Editor Input Reader", menuName = "Input/Input Reader")]
+[CreateAssetMenu(fileName = "New Level Editor Input Reader", menuName = "Input/Level Editor Input Reader")]
 public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerActions
 {
     Controls controls;
