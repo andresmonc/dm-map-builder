@@ -8,7 +8,7 @@ public class BuildingCreator : Singleton<BuildingCreator>
 {
     Controls controls;
     Vector2 mousePos;
-
+    public BuildingObjectBase BuildingObjectBase { private get; set; }
     protected override void Awake()
     {
         base.Awake();
@@ -44,6 +44,11 @@ public class BuildingCreator : Singleton<BuildingCreator>
     private void HandleMouseMove(InputAction.CallbackContext context)
     {
         mousePos = context.ReadValue<Vector2>();
+    }
+
+    public void ObjectSelected(BuildingObjectBase buildingObjectBase)
+    {
+        BuildingObjectBase = buildingObjectBase;
     }
 
 
