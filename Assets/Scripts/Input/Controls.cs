@@ -200,6 +200,74 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LevelEditorPlayer"",
+            ""id"": ""0c406ede-d7bc-449a-a4e1-6ac5c3201a2d"",
+            ""actions"": [
+                {
+                    ""name"": ""Mouse Left Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""a162cc48-7829-4f24-9751-e18118103318"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mouse Right Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""121c02e2-7cbd-43b1-86bf-ab5299500d7d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""fa11c050-8e0d-4c96-a24c-0c78ab0ca42e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""978f722d-46c4-4f5a-95bb-45994de7bd4d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mouse Left Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d88ae9ff-402f-4301-87c5-de2c9ecc7f95"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mouse Right Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b0a2b58-22a2-4ddc-ba0a-4e438376d19e"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -226,6 +294,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_PrimaryFire = m_Player.FindAction("Primary Fire", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        // LevelEditorPlayer
+        m_LevelEditorPlayer = asset.FindActionMap("LevelEditorPlayer", throwIfNotFound: true);
+        m_LevelEditorPlayer_MouseLeftClick = m_LevelEditorPlayer.FindAction("Mouse Left Click", throwIfNotFound: true);
+        m_LevelEditorPlayer_MouseRightClick = m_LevelEditorPlayer.FindAction("Mouse Right Click", throwIfNotFound: true);
+        m_LevelEditorPlayer_MousePosition = m_LevelEditorPlayer.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -345,6 +418,68 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // LevelEditorPlayer
+    private readonly InputActionMap m_LevelEditorPlayer;
+    private List<ILevelEditorPlayerActions> m_LevelEditorPlayerActionsCallbackInterfaces = new List<ILevelEditorPlayerActions>();
+    private readonly InputAction m_LevelEditorPlayer_MouseLeftClick;
+    private readonly InputAction m_LevelEditorPlayer_MouseRightClick;
+    private readonly InputAction m_LevelEditorPlayer_MousePosition;
+    public struct LevelEditorPlayerActions
+    {
+        private @Controls m_Wrapper;
+        public LevelEditorPlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseLeftClick => m_Wrapper.m_LevelEditorPlayer_MouseLeftClick;
+        public InputAction @MouseRightClick => m_Wrapper.m_LevelEditorPlayer_MouseRightClick;
+        public InputAction @MousePosition => m_Wrapper.m_LevelEditorPlayer_MousePosition;
+        public InputActionMap Get() { return m_Wrapper.m_LevelEditorPlayer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LevelEditorPlayerActions set) { return set.Get(); }
+        public void AddCallbacks(ILevelEditorPlayerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LevelEditorPlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LevelEditorPlayerActionsCallbackInterfaces.Add(instance);
+            @MouseLeftClick.started += instance.OnMouseLeftClick;
+            @MouseLeftClick.performed += instance.OnMouseLeftClick;
+            @MouseLeftClick.canceled += instance.OnMouseLeftClick;
+            @MouseRightClick.started += instance.OnMouseRightClick;
+            @MouseRightClick.performed += instance.OnMouseRightClick;
+            @MouseRightClick.canceled += instance.OnMouseRightClick;
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
+        }
+
+        private void UnregisterCallbacks(ILevelEditorPlayerActions instance)
+        {
+            @MouseLeftClick.started -= instance.OnMouseLeftClick;
+            @MouseLeftClick.performed -= instance.OnMouseLeftClick;
+            @MouseLeftClick.canceled -= instance.OnMouseLeftClick;
+            @MouseRightClick.started -= instance.OnMouseRightClick;
+            @MouseRightClick.performed -= instance.OnMouseRightClick;
+            @MouseRightClick.canceled -= instance.OnMouseRightClick;
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
+        }
+
+        public void RemoveCallbacks(ILevelEditorPlayerActions instance)
+        {
+            if (m_Wrapper.m_LevelEditorPlayerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILevelEditorPlayerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LevelEditorPlayerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LevelEditorPlayerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LevelEditorPlayerActions @LevelEditorPlayer => new LevelEditorPlayerActions(this);
     private int m_KeyBoardMouseSchemeIndex = -1;
     public InputControlScheme KeyBoardMouseScheme
     {
@@ -359,5 +494,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnPrimaryFire(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+    }
+    public interface ILevelEditorPlayerActions
+    {
+        void OnMouseLeftClick(InputAction.CallbackContext context);
+        void OnMouseRightClick(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

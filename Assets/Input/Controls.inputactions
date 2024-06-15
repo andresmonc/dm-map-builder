@@ -178,6 +178,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "LevelEditorPlayer",
+            "id": "0c406ede-d7bc-449a-a4e1-6ac5c3201a2d",
+            "actions": [
+                {
+                    "name": "Mouse Left Click",
+                    "type": "Button",
+                    "id": "a162cc48-7829-4f24-9751-e18118103318",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Mouse Right Click",
+                    "type": "Button",
+                    "id": "121c02e2-7cbd-43b1-86bf-ab5299500d7d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "fa11c050-8e0d-4c96-a24c-0c78ab0ca42e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "978f722d-46c4-4f5a-95bb-45994de7bd4d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse Left Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d88ae9ff-402f-4301-87c5-de2c9ecc7f95",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse Right Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b0a2b58-22a2-4ddc-ba0a-4e438376d19e",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
