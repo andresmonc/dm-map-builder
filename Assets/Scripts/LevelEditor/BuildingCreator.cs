@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class BuildingCreator : Singleton<BuildingCreator>
 {
+    [SerializeField] Tilemap previewMap;
     Controls controls;
     Vector2 mousePos;
     public BuildingObjectBase BuildingObjectBase { private get; set; }
@@ -49,6 +50,10 @@ public class BuildingCreator : Singleton<BuildingCreator>
     public void ObjectSelected(BuildingObjectBase buildingObjectBase)
     {
         BuildingObjectBase = buildingObjectBase;
+
+        // set preview where mouse is
+        // on click draw tile on tile map
+        // on right click cancel drawing
     }
 
 
