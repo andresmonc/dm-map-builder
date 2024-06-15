@@ -238,7 +238,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""978f722d-46c4-4f5a-95bb-45994de7bd4d"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap,SlowTap"",
                     ""processors"": """",
                     ""groups"": ""KeyBoard & Mouse"",
                     ""action"": ""Mouse Left Click"",

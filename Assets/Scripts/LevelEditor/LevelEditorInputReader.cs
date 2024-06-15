@@ -18,19 +18,9 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
         if (controls == null)
         {
             controls = new Controls();
+            controls.LevelEditorPlayer.SetCallbacks(this);
         }
         controls.LevelEditorPlayer.Enable();
-        controls.LevelEditorPlayer.MousePosition.performed += OnMousePosition;
-        controls.LevelEditorPlayer.MouseLeftClick.performed += OnMouseLeftClick;
-        controls.LevelEditorPlayer.MouseRightClick.performed += OnMouseRightClick;
-
-    }
-
-    private void OnDisable()
-    {
-        controls.LevelEditorPlayer.MousePosition.performed -= OnMousePosition;
-        controls.LevelEditorPlayer.MouseLeftClick.performed -= OnMouseLeftClick;
-        controls.LevelEditorPlayer.MouseRightClick.performed -= OnMouseRightClick;
     }
 
 
