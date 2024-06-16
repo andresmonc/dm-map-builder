@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 4949348993984267680}
-  text: {fileID: 0}
+  text: {fileID: 1779574652044770597}
 --- !u!1 &6490267607557030503
 GameObject:
   m_ObjectHideFlags: 0

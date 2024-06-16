@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WallUICategory
   m_EditorClassIdentifier: 
   <siblingIndex>k__BackingField: 1
-  <BackgroundColor>k__BackingField: {r: 0.18038002, g: 0.5707547, b: 0.33621162, a: 0}
+  <BackgroundColor>k__BackingField: {r: 0.18038002, g: 0.5707547, b: 0.33621162, a: 1}

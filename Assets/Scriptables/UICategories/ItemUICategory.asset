@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ItemUICategory
   m_EditorClassIdentifier: 
   <siblingIndex>k__BackingField: 2
-  <BackgroundColor>k__BackingField: {r: 0.6273585, g: 0.19235049, b: 0.19235049, a: 0}
+  <BackgroundColor>k__BackingField: {r: 0.6273585, g: 0.19235049, b: 0.19235049, a: 1}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FloorUICategory
   m_EditorClassIdentifier: 
   <siblingIndex>k__BackingField: 0
-  <BackgroundColor>k__BackingField: {r: 0.24670699, g: 0.69758016, b: 0.7264151, a: 0}
+  <BackgroundColor>k__BackingField: {r: 0.24670699, g: 0.69758016, b: 0.7264151, a: 1}
