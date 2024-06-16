@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Category>k__BackingField: {fileID: 11400000, guid: d1c493daccff30f49af1ed2a86d9204d, type: 2}
   <TileBase>k__BackingField: {fileID: 11400000, guid: a4769dc11b48e794884dccadded30976, type: 2}
+  uICategory: {fileID: 11400000, guid: 1ca44ca155a87344e9e3b5769a7ac317, type: 2}
   placeType: 2
