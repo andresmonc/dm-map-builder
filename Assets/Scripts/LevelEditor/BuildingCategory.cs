@@ -6,10 +6,10 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenuAttribute(fileName = "BuildingCategory", menuName = "Level Building/Create Category")]
 public class BuildingCategory : ScriptableObject
 {
-    [SerializeField] public string TileMapName { get; private set; }
-    [SerializeField] public PlaceType PlaceType { get; private set; }
-    [SerializeField] int sortingOrder = 0;
-    Tilemap tilemap;
+    [field: SerializeField] public string TileMapName { get; private set; }
+    [field: SerializeField] public PlaceType PlaceType { get; private set; }
+    [field: SerializeField] public int SortingOrder { get; private set; }
+    public Tilemap Tilemap { get; set; }
 }
 
 public enum PlaceType

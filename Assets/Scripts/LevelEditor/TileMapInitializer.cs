@@ -16,10 +16,12 @@ public class TileMapInitializer : Singleton<TileMapInitializer>
     {
         foreach (BuildingCategory category in categoriesToCreateTileMapFor)
         {
-            GameObject tileMap = new GameObject(category.TileMapName);
-            tileMap.AddComponent<Tilemap>();
-            tileMap.AddComponent<TilemapRenderer>();
-            tileMap.transform.SetParent(tileMapParent);
+            GameObject tileMapGameObject = new GameObject(category.TileMapName);
+            Tilemap tileMapComponent = tileMapGameObject.AddComponent<Tilemap>();
+            TilemapRenderer tileMapRenderer = tileMapGameObject.AddComponent<TilemapRenderer>();
+            tileMapGameObject.transform.SetParent(tileMapParent);
+            category.Tilemap = tileMapComponent;
+            tileMapRenderer.sortingOrder = category.SortingOrder;
         }
     }
 }

@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e71ab2087019324e9939546698fee5c, type: 3}
   m_Name: WallCategory
   m_EditorClassIdentifier: 
-  sortingOrder: 1
+  <TileMapName>k__BackingField: WallMap
+  <PlaceType>k__BackingField: 0
+  <SortingOrder>k__BackingField: 1
