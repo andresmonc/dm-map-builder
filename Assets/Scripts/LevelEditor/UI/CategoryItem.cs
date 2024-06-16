@@ -8,8 +8,7 @@ public class CategoryItem : MonoBehaviour
 {
     [SerializeField] Image image;
     [SerializeField] TMP_Text text;
-
-
+    [field: SerializeField] public Transform BuildableItemsParent { get; private set; }
 
     public void Initialize(int siblingIndex, Color color, string name)
     {

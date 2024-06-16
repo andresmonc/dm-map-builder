@@ -8,7 +8,7 @@ public class BuildingObjectBase : ScriptableObject
 {
     [field: SerializeField] public BuildingCategory Category { get; private set; }
     [field: SerializeField] public TileBase TileBase { get; private set; }
-    [SerializeField] UICategory uICategory;
+    [field: SerializeField] public UICategory UICategory { get; private set; }
     [SerializeField] private PlaceType placeType;
     public PlaceType PlaceType
     {

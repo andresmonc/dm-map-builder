@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4949348993984267680}
   text: {fileID: 1779574652044770597}
+  <BuildableItemsParent>k__BackingField: {fileID: 512431298156090271}
 --- !u!1 &6490267607557030503
 GameObject:
   m_ObjectHideFlags: 0

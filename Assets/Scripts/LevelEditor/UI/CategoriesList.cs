@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class CategoriesList : MonoBehaviour
 {
@@ -26,5 +27,22 @@ public class CategoriesList : MonoBehaviour
                 category.name
             );
         }
+
+        BuildingObjectBase[] buildables = GetAllBuildables();
+        foreach (BuildingObjectBase buildable in buildables)
+        {
+            if (buildable == null) { continue; }
+            Debug.Log(buildable.name);
+            Debug.Log(buildable.UICategory);
+            GameObject categoryParent = uiElements[buildable.UICategory];
+            GameObject buildableItem = Instantiate(itemPrefab, categoryParent.transform);
+            Tile tile = (Tile)buildable.TileBase;
+            buildableItem.GetComponent<BuildableItem>().Initialize(tile.sprite);
+        }
+    }
+
+    private BuildingObjectBase[] GetAllBuildables()
+    {
+        return Resources.LoadAll<BuildingObjectBase>("Scriptables/Buildables");
     }
 }
