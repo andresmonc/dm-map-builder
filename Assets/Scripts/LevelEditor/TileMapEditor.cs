@@ -146,7 +146,7 @@ public class TileMapEditor : Singleton<TileMapEditor>
             {
                 case PlaceType.Line:
                 case PlaceType.Rectangle:
-                    DrawBounds(defaultMap);
+                    DrawBounds(DetermineTileMap());
                     previewMap.ClearAllTiles();
                     break;
             }
@@ -203,9 +203,19 @@ public class TileMapEditor : Singleton<TileMapEditor>
         }
     }
 
+    private Tilemap DetermineTileMap(){
+        Debug.Log(selectedObject.Category.name);
+        Debug.Log(selectedObject.Category.Tilemap.name);
+         if(selectedObject.Category == null || selectedObject.Category.Tilemap == null){
+            return defaultMap;
+         } else {
+            return selectedObject.Category.Tilemap;
+         }
+    }
+
     private void DrawItem()
-    {
-        defaultMap.SetTile(currentGridPos, tileBase);
+    {        
+        DetermineTileMap().SetTile(currentGridPos, tileBase);
     }
 
 }
