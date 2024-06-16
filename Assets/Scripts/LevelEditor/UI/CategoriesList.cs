@@ -36,7 +36,7 @@ public class CategoriesList : MonoBehaviour
             CategoryItem categoryParent = uiElements[buildable.UICategory];
             GameObject buildableItem = Instantiate(itemPrefab, categoryParent.BuildableItemsParent.transform);
             Tile tile = (Tile)buildable.TileBase;
-            buildableItem.GetComponent<BuildableItem>().Initialize(tile.sprite);
+            buildableItem.GetComponent<BuildableItem>().Initialize(tile.sprite, buildable);
         }
     }
 
