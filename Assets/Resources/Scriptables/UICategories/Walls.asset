@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffb516d9dc40e4eb917baf9856c3a6, type: 3}
   m_Name: Walls
   m_EditorClassIdentifier: 
-  <siblingIndex>k__BackingField: 1
+  <siblingIndex>k__BackingField: 2
   <BackgroundColor>k__BackingField: {r: 0.18038002, g: 0.5707547, b: 0.33621162, a: 1}

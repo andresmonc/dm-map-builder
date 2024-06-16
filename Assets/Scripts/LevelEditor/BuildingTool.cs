@@ -7,3 +7,9 @@ public class BuildingTool : BuildingObjectBase
 {
 
 }
+
+enum ToolType
+{
+    None,
+    Eraser
+}

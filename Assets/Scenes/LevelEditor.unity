@@ -339,6 +339,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 01149f2990f4b4f40879d30154040b73, type: 2}
   - {fileID: 11400000, guid: 3e34c6d9b0e2b434a92d2bcfb1b8b6ba, type: 2}
   - {fileID: 11400000, guid: 1ca44ca155a87344e9e3b5769a7ac317, type: 2}
+  - {fileID: 11400000, guid: c4e779571be98374fb2b8fdb1bcac64b, type: 2}
   wrapperElement: {fileID: 366529428}
   categoryPrefab: {fileID: 5126140867137475548, guid: b8a27dcd73c3eef4995bfb2d82d1922b, type: 3}
   itemPrefab: {fileID: 3523669466650600180, guid: 6fd1a82be4971f3409a310f67418a23a, type: 3}
@@ -541,6 +542,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0d11fc52340443a4c83d2869a70d445b, type: 2}
   - {fileID: 11400000, guid: 034fc4c61e0851f41b952a01e5dcbf13, type: 2}
   - {fileID: 11400000, guid: d1c493daccff30f49af1ed2a86d9204d, type: 2}
+  - {fileID: 11400000, guid: 2a207777876c7514da30c5b3b05f6bef, type: 2}
   tileMapParent: {fileID: 1905933680}
 --- !u!114 &878602933
 MonoBehaviour:
