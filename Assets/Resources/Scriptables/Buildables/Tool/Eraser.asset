@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Eraser
   m_EditorClassIdentifier: 
   <Category>k__BackingField: {fileID: 11400000, guid: 2a207777876c7514da30c5b3b05f6bef, type: 2}
-  <TileBase>k__BackingField: {fileID: 11400000, guid: 12adf2f75475a624cb81edc79e602ba8, type: 2}
+  <TileBase>k__BackingField: {fileID: 11400000, guid: 5032910191c363b4aa76b3ce1beb311b, type: 2}
   <UICategory>k__BackingField: {fileID: 11400000, guid: c4e779571be98374fb2b8fdb1bcac64b, type: 2}
-  placeType: 1
+  placeType: 3
   toolType: 1
+  <ToolTile>k__BackingField: {fileID: 11400000, guid: 12adf2f75475a624cb81edc79e602ba8, type: 2}

@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "Buildable", menuName = "Level Building/Create Tool")]
 public class BuildingTool : BuildingObjectBase
 {
     [SerializeField] private ToolType toolType;
+    [field: SerializeField] public Tile ToolTile { get; private set; }
+
 
     public void Use(Vector3Int position)
     {

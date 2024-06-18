@@ -130,9 +130,6 @@ public class TileMapEditor : Singleton<TileMapEditor>
     {
         switch (selectedObject.PlaceType)
         {
-            case PlaceType.Single:
-                DrawItem(DetermineTileMap(), currentGridPos, tileBase);
-                break;
             case PlaceType.Line:
                 LineRenderer();
                 break;
@@ -148,6 +145,9 @@ public class TileMapEditor : Singleton<TileMapEditor>
         {
             switch (selectedObject.PlaceType)
             {
+                case PlaceType.Single:
+                    DrawItem(DetermineTileMap(), currentGridPos, tileBase);
+                    break;
                 case PlaceType.Line:
                 case PlaceType.Rectangle:
                     DrawBounds(DetermineTileMap());
@@ -220,7 +220,7 @@ public class TileMapEditor : Singleton<TileMapEditor>
 
     private void DrawItem(Tilemap map, Vector3Int position, TileBase tileBase)
     {
-        if (selectedObject is BuildingTool buildingTool)
+        if (map != previewMap && selectedObject is BuildingTool buildingTool)
         {
             buildingTool.Use(position);
         }

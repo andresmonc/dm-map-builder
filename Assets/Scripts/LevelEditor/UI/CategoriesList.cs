@@ -33,7 +33,16 @@ public class CategoriesList : MonoBehaviour
             if (buildable == null) { continue; }
             CategoryItem categoryParent = uiElements[buildable.UICategory];
             GameObject buildableItem = Instantiate(itemPrefab, categoryParent.BuildableItemsParent.transform);
-            Tile tile = (Tile)buildable.TileBase;
+            Tile tile;
+            if (buildable is BuildingTool tool)
+            {
+                tile = (Tile)tool.ToolTile;
+            }
+            else
+            {
+                tile = (Tile)buildable.TileBase;
+            }
+
             buildableItem.GetComponent<BuildableItem>().Initialize(tile.sprite, buildable);
         }
     }
