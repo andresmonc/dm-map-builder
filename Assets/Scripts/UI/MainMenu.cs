@@ -18,7 +18,9 @@ public class MainMenu : MonoBehaviour
         await ClientSingleton.Instance.ClientGameManager.StartClientAsync(joinCodeField.text);
     }
 
-    public void StartCampaignEditor(){
+    public void StartCampaignEditor()
+    {
+        Debug.Log("scene change?");
         SceneManager.LoadScene("LevelEditor");
     }
 }
