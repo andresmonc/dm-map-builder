@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 878602930}
   - component: {fileID: 878602932}
   - component: {fileID: 878602933}
+  - component: {fileID: 878602934}
   m_Layer: 0
   m_Name: TileMapManager
   m_TagString: Untagged
@@ -557,6 +558,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: tilemapData.json
+--- !u!114 &878602934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878602929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623845d0ff77bcd4dbaad9080743a112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: c895532b97b26704a979d302912a2329, type: 2}
+  zoomSpeed: 2
+  minZoom: 2
+  maxZoom: 10
 --- !u!1 &935014479
 GameObject:
   m_ObjectHideFlags: 0
