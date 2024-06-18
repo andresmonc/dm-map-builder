@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -15,5 +16,9 @@ public class MainMenu : MonoBehaviour
     public async void StartClient()
     {
         await ClientSingleton.Instance.ClientGameManager.StartClientAsync(joinCodeField.text);
+    }
+
+    public void StartCampaignEditor(){
+        SceneManager.LoadScene("LevelEditor");
     }
 }
