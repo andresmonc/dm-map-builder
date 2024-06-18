@@ -57,7 +57,7 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
         }
         else if (value < 0)
         {
-            ScrollEvent?.Invoke(0);
+            ScrollEvent?.Invoke(-1);
         }
     }
 }
