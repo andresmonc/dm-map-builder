@@ -15,6 +15,9 @@ public class BuildingTool : BuildingObjectBase
             case ToolType.Eraser:
                 tc.Eraser();
                 break;
+            default:
+                Debug.LogError("Tool type not defined!");
+                break;
         }
     }
 }
