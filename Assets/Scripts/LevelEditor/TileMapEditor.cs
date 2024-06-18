@@ -222,7 +222,7 @@ public class TileMapEditor : Singleton<TileMapEditor>
     {
         if (selectedObject is BuildingTool buildingTool)
         {
-            buildingTool.Use();
+            buildingTool.Use(position);
         }
         else
         {

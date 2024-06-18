@@ -7,13 +7,13 @@ public class BuildingTool : BuildingObjectBase
 {
     [SerializeField] private ToolType toolType;
 
-    public void Use()
+    public void Use(Vector3Int position)
     {
         ToolController tc = ToolController.GetInstance();
         switch (toolType)
         {
             case ToolType.Eraser:
-                tc.Eraser();
+                tc.Eraser(position);
                 break;
             default:
                 Debug.LogError("Tool type not defined!");

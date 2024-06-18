@@ -15,14 +15,20 @@ public class ToolController : Singleton<ToolController>
     private void Start()
     {
         HashSet<Tilemap> excludedMaps = toolMapExclusions.ToHashSet();
-        sceneMaps = FindObjectsOfType<Tilemap>().ToList().FindAll(map => { return map != excludedMaps.Contains(map); });
-        sceneMaps.ForEach(map =>
-        {
-            Debug.Log(map.name);
-        });
+        sceneMaps = FindObjectsOfType<Tilemap>().ToList()
+            .FindAll(map => { return map != excludedMaps.Contains(map); })
+            .OrderBy(map => map.GetComponent<Renderer>().sortingOrder).ToList();
     }
-    public void Eraser()
+    public void Eraser(Vector3Int position)
     {
-        Debug.Log("Erasing");
+        for (int i = sceneMaps.Count - 1; i >= 0; i--)
+        {
+            Tilemap map = sceneMaps[i];
+            if (map.HasTile(position))
+            {
+                map.SetTile(position, null);
+                break;
+            };
+        }
     }
 }
