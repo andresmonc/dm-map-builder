@@ -20,7 +20,6 @@ public class MainMenu : MonoBehaviour
 
     public void StartCampaignEditor()
     {
-        Debug.Log("scene change?");
         SceneManager.LoadScene("LevelEditor");
     }
 }
