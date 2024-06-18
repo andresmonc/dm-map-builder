@@ -33,8 +33,6 @@ public class VisibleGridDisplay : MonoBehaviour
                 tilemap.SetTile(position, tile);
             }
         }
-
-        Debug.Log("Tilemap bounds set.");
     }
 }
 
