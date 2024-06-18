@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -118,10 +119,10 @@ public class TileMapEditor : Singleton<TileMapEditor>
     private void UpdatePreview()
     {
         // remove old tile
-        DrawItem(previewMap, lastGridPosition, null);
+        previewMap.SetTile(lastGridPosition, null);
 
         // set current tile to current pos
-        DrawItem(previewMap, currentGridPos, tileBase);
+        previewMap.SetTile(currentGridPos, tileBase);
 
     }
 
@@ -168,7 +169,6 @@ public class TileMapEditor : Singleton<TileMapEditor>
 
     private void LineRenderer()
     {
-        Debug.Log("Line renderer working");
         //  Render Preview on UI Map, draw real one on Release
         previewMap.ClearAllTiles();
 
@@ -208,8 +208,6 @@ public class TileMapEditor : Singleton<TileMapEditor>
 
     private Tilemap DetermineTileMap()
     {
-        Debug.Log(selectedObject.Category.name);
-        Debug.Log(selectedObject.Category.Tilemap.name);
         if (selectedObject.Category == null || selectedObject.Category.Tilemap == null)
         {
             return defaultMap;
@@ -222,7 +220,14 @@ public class TileMapEditor : Singleton<TileMapEditor>
 
     private void DrawItem(Tilemap map, Vector3Int position, TileBase tileBase)
     {
-        map.SetTile(position, tileBase);
+        if (selectedObject is BuildingTool buildingTool)
+        {
+            buildingTool.Use();
+        }
+        else
+        {
+            map.SetTile(position, tileBase);
+        }
     }
 
 }

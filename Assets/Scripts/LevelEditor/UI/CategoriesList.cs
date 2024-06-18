@@ -31,8 +31,6 @@ public class CategoriesList : MonoBehaviour
         foreach (BuildingObjectBase buildable in buildables)
         {
             if (buildable == null) { continue; }
-            Debug.Log(buildable.name);
-            Debug.Log(buildable.UICategory);
             CategoryItem categoryParent = uiElements[buildable.UICategory];
             GameObject buildableItem = Instantiate(itemPrefab, categoryParent.BuildableItemsParent.transform);
             Tile tile = (Tile)buildable.TileBase;

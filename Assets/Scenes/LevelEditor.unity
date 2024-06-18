@@ -530,6 +530,7 @@ GameObject:
   - component: {fileID: 878602932}
   - component: {fileID: 878602933}
   - component: {fileID: 878602934}
+  - component: {fileID: 878602935}
   m_Layer: 0
   m_Name: TileMapManager
   m_TagString: Untagged
@@ -614,6 +615,21 @@ MonoBehaviour:
   zoomSpeed: 2
   minZoom: 2
   maxZoom: 10
+--- !u!114 &878602935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878602929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10146c31dc574fa4abaed7d6b18b50d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolMapExclusions:
+  - {fileID: 1168526225}
+  - {fileID: 1432150095}
 --- !u!1 &935014479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,7 +1288,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10000
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
