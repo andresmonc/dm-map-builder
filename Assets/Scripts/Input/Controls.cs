@@ -234,12 +234,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Mouse Scroll"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""b5279047-356d-40a9-b614-8caba5f6aaa8"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -279,7 +279,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cb7a26fa-6f25-4411-b856-74a08a13d07c"",
-                    ""path"": ""<Mouse>/middleButton"",
+                    ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

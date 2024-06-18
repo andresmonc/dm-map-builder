@@ -16,3 +16,4 @@ MonoBehaviour:
   <TileBase>k__BackingField: {fileID: 11400000, guid: 12adf2f75475a624cb81edc79e602ba8, type: 2}
   <UICategory>k__BackingField: {fileID: 11400000, guid: c4e779571be98374fb2b8fdb1bcac64b, type: 2}
   placeType: 1
+  toolType: 1

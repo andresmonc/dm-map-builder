@@ -81,8 +81,9 @@ public class TileMapEditor : Singleton<TileMapEditor>
     {
         if (selectedObject == null || !click) { return; }
         selectedObject = null;
-        previewMap.SetTile(lastGridPosition, null);
-        previewMap.SetTile(currentGridPos, null);
+        DrawItem(previewMap, lastGridPosition, null);
+        DrawItem(previewMap, currentGridPos, null);
+
     }
 
     private void HandleMouseLeftClick(InputAction.CallbackContext ctx)
@@ -117,9 +118,11 @@ public class TileMapEditor : Singleton<TileMapEditor>
     private void UpdatePreview()
     {
         // remove old tile
-        previewMap.SetTile(lastGridPosition, null);
+        DrawItem(previewMap, lastGridPosition, null);
+
         // set current tile to current pos
-        previewMap.SetTile(currentGridPos, tileBase);
+        DrawItem(previewMap, currentGridPos, tileBase);
+
     }
 
     private void HandleDrawing()
@@ -127,7 +130,7 @@ public class TileMapEditor : Singleton<TileMapEditor>
         switch (selectedObject.PlaceType)
         {
             case PlaceType.Single:
-                DrawItem();
+                DrawItem(DetermineTileMap(), currentGridPos, tileBase);
                 break;
             case PlaceType.Line:
                 LineRenderer();
@@ -198,24 +201,28 @@ public class TileMapEditor : Singleton<TileMapEditor>
         {
             for (int y = bounds.yMin; y <= bounds.yMax; y++)
             {
-                map.SetTile(new Vector3Int(x, y, 0), tileBase);
+                DrawItem(map, new Vector3Int(x, y, 0), tileBase);
             }
         }
     }
 
-    private Tilemap DetermineTileMap(){
+    private Tilemap DetermineTileMap()
+    {
         Debug.Log(selectedObject.Category.name);
         Debug.Log(selectedObject.Category.Tilemap.name);
-         if(selectedObject.Category == null || selectedObject.Category.Tilemap == null){
+        if (selectedObject.Category == null || selectedObject.Category.Tilemap == null)
+        {
             return defaultMap;
-         } else {
+        }
+        else
+        {
             return selectedObject.Category.Tilemap;
-         }
+        }
     }
 
-    private void DrawItem()
-    {        
-        DetermineTileMap().SetTile(currentGridPos, tileBase);
+    private void DrawItem(Tilemap map, Vector3Int position, TileBase tileBase)
+    {
+        map.SetTile(position, tileBase);
     }
 
 }

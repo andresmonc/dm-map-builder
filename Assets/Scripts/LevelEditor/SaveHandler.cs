@@ -9,9 +9,6 @@ public class SaveHandler : MonoBehaviour
     Dictionary<string, Tilemap> tilemaps = new Dictionary<string, Tilemap>();
     Dictionary<TileBase, BuildingObjectBase> tileBaseToBuildingObject = new Dictionary<TileBase, BuildingObjectBase>();
     Dictionary<string, TileBase> guidToTileBase = new Dictionary<string, TileBase>();
-
-
-    [SerializeField] BoundsInt bounds;
     [SerializeField] string fileName = "tilemapData.json";
 
     private void Start()

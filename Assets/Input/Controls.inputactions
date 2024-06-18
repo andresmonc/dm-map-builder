@@ -202,9 +202,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MousePosition",
+                    "name": "Mouse Position",
                     "type": "Value",
                     "id": "fa11c050-8e0d-4c96-a24c-0c78ab0ca42e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Mouse Scroll",
+                    "type": "Value",
+                    "id": "b5279047-356d-40a9-b614-8caba5f6aaa8",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -241,7 +250,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard & Mouse",
-                    "action": "MousePosition",
+                    "action": "Mouse Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb7a26fa-6f25-4411-b856-74a08a13d07c",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

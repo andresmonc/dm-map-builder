@@ -48,6 +48,7 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
 
     public void OnMouseScroll(InputAction.CallbackContext context)
     {
-        Debug.Log(context.ReadValue<Vector2>());
+        float value = Mathf.Sign(context.ReadValue<Vector2>().y);
+        Debug.Log(value);
     }
 }
