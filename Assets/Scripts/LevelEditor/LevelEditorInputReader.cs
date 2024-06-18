@@ -10,6 +10,8 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
     Controls controls;
     public event Action<InputAction.CallbackContext> LeftClickEvent;
     public event Action<bool> RightClickEvent;
+
+    public event Action<float> ScrollEvent;
     public Vector2 MousePosition { get; private set; }
 
 
@@ -48,7 +50,14 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
 
     public void OnMouseScroll(InputAction.CallbackContext context)
     {
-        float value = Mathf.Sign(context.ReadValue<Vector2>().y);
-        Debug.Log(value);
+        float value = context.ReadValue<Vector2>().y;
+        if (value > 0)
+        {
+            ScrollEvent?.Invoke(1);
+        }
+        else if (value < 0)
+        {
+            ScrollEvent?.Invoke(0);
+        }
     }
 }
