@@ -389,7 +389,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 868726022609622615}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LobbyItem, Assembly-CSharp
         m_MethodName: Join
         m_Mode: 1
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 7092284467438278544}
   - component: {fileID: 2110913831491323046}
   m_Layer: 0
-  m_Name: LobbyName
+  m_Name: CampaignName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 7731797119732767755}
   - component: {fileID: 9138062535308871732}
   - component: {fileID: 6143331553673584344}
-  - component: {fileID: 868726022609622615}
+  - component: {fileID: -8778143696574984581}
   m_Layer: 0
   m_Name: CampaignItem
   m_TagString: Untagged
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &868726022609622615
+--- !u!114 &-8778143696574984581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -623,8 +623,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5384383942594250485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49d0cc8a48cb19144bf770d632be9b80, type: 3}
+  m_Script: {fileID: 11500000, guid: 64cf87305d22a8f4388a4adbfbe06b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyNameText: {fileID: 2110913831491323046}
-  lobbyPlayersText: {fileID: 2695189294013925112}
+  campaignNameText: {fileID: 2110913831491323046}
+  lastModifiedText: {fileID: 2695189294013925112}
