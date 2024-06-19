@@ -240,6 +240,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Mouse Middle"",
+                    ""type"": ""Value"",
+                    ""id"": ""858f551f-b71e-4986-adec-44ac206d5a04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -286,6 +295,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Mouse Scroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d433bc4c-56e1-48ae-9781-eae19c340ac7"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard & Mouse"",
+                    ""action"": ""Mouse Middle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -320,6 +340,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_LevelEditorPlayer_MouseRightClick = m_LevelEditorPlayer.FindAction("Mouse Right Click", throwIfNotFound: true);
         m_LevelEditorPlayer_MousePosition = m_LevelEditorPlayer.FindAction("Mouse Position", throwIfNotFound: true);
         m_LevelEditorPlayer_MouseScroll = m_LevelEditorPlayer.FindAction("Mouse Scroll", throwIfNotFound: true);
+        m_LevelEditorPlayer_MouseMiddle = m_LevelEditorPlayer.FindAction("Mouse Middle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -447,6 +468,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_LevelEditorPlayer_MouseRightClick;
     private readonly InputAction m_LevelEditorPlayer_MousePosition;
     private readonly InputAction m_LevelEditorPlayer_MouseScroll;
+    private readonly InputAction m_LevelEditorPlayer_MouseMiddle;
     public struct LevelEditorPlayerActions
     {
         private @Controls m_Wrapper;
@@ -455,6 +477,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @MouseRightClick => m_Wrapper.m_LevelEditorPlayer_MouseRightClick;
         public InputAction @MousePosition => m_Wrapper.m_LevelEditorPlayer_MousePosition;
         public InputAction @MouseScroll => m_Wrapper.m_LevelEditorPlayer_MouseScroll;
+        public InputAction @MouseMiddle => m_Wrapper.m_LevelEditorPlayer_MouseMiddle;
         public InputActionMap Get() { return m_Wrapper.m_LevelEditorPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -476,6 +499,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MouseScroll.started += instance.OnMouseScroll;
             @MouseScroll.performed += instance.OnMouseScroll;
             @MouseScroll.canceled += instance.OnMouseScroll;
+            @MouseMiddle.started += instance.OnMouseMiddle;
+            @MouseMiddle.performed += instance.OnMouseMiddle;
+            @MouseMiddle.canceled += instance.OnMouseMiddle;
         }
 
         private void UnregisterCallbacks(ILevelEditorPlayerActions instance)
@@ -492,6 +518,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MouseScroll.started -= instance.OnMouseScroll;
             @MouseScroll.performed -= instance.OnMouseScroll;
             @MouseScroll.canceled -= instance.OnMouseScroll;
+            @MouseMiddle.started -= instance.OnMouseMiddle;
+            @MouseMiddle.performed -= instance.OnMouseMiddle;
+            @MouseMiddle.canceled -= instance.OnMouseMiddle;
         }
 
         public void RemoveCallbacks(ILevelEditorPlayerActions instance)
@@ -530,5 +559,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMouseRightClick(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
+        void OnMouseMiddle(InputAction.CallbackContext context);
     }
 }

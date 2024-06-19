@@ -60,4 +60,9 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
             ScrollEvent?.Invoke(-1);
         }
     }
+
+    public void OnMouseMiddle(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
 }
