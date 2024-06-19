@@ -1408,7 +1408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7731797119732767755, guid: 99b0b12a00cd9ab43b7a80c349e46ccc, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7731797119732767755, guid: 99b0b12a00cd9ab43b7a80c349e46ccc, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1416,11 +1416,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7731797119732767755, guid: 99b0b12a00cd9ab43b7a80c349e46ccc, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7731797119732767755, guid: 99b0b12a00cd9ab43b7a80c349e46ccc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1115
       objectReference: {fileID: 0}
     - target: {fileID: 7731797119732767755, guid: 99b0b12a00cd9ab43b7a80c349e46ccc, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1456,11 +1456,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7731797119732767755, guid: 99b0b12a00cd9ab43b7a80c349e46ccc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 567.5
       objectReference: {fileID: 0}
     - target: {fileID: 7731797119732767755, guid: 99b0b12a00cd9ab43b7a80c349e46ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 7731797119732767755, guid: 99b0b12a00cd9ab43b7a80c349e46ccc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7741,7 +7741,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637549346}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fc3dbe80dbc4bb44ad807cd595a5095, type: 3}
   m_Name: 
@@ -7756,7 +7756,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637549346}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 939501f1c35f4a14585c9c05e2e5fab9, type: 3}
   m_Name: 
@@ -8155,8 +8155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_AnchoredPosition: {x: -15, y: -15}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1972514465
 MonoBehaviour:
