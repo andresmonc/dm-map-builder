@@ -32,15 +32,6 @@ public class SaveHandler : MonoBehaviour
         }
     }
 
-    // private void InitTilemaps()
-    // {
-    //     Tilemap[] maps = FindObjectsOfType<Tilemap>();
-    //     foreach (var map in maps)
-    //     {
-    //         tilemaps.Add(map.name, map);
-    //     }
-    // }
-
     public void OnSave()
     {
         List<TilemapData> data = new List<TilemapData>();
