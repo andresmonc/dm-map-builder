@@ -243,12 +243,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Mouse Middle"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""858f551f-b71e-4986-adec-44ac206d5a04"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [

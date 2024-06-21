@@ -12,6 +12,7 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
     public event Action<bool> RightClickEvent;
 
     public event Action<float> ScrollEvent;
+    public event Action<bool> MiddleClickEvent;
     public Vector2 MousePosition { get; private set; }
 
 
@@ -63,6 +64,13 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
 
     public void OnMouseMiddle(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        if (context.performed)
+        {
+            MiddleClickEvent?.Invoke(true);
+        }
+        else if (context.canceled)
+        {
+            MiddleClickEvent?.Invoke(false);
+        }
     }
 }
