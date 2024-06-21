@@ -23,7 +23,6 @@ public class BuildableItem : MonoBehaviour
         {
             tileMapEditor = TileMapEditor.GetInstance();
         }
-        Debug.Log("Button was clicked: " + buildingObjectBase.name);
         tileMapEditor.ObjectSelected(buildingObjectBase);
     }
 }
