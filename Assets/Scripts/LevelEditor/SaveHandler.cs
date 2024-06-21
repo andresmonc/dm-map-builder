@@ -6,14 +6,12 @@ using UnityEngine.Tilemaps;
 
 public class SaveHandler : MonoBehaviour
 {
-    Dictionary<string, Tilemap> tilemaps = new Dictionary<string, Tilemap>();
     Dictionary<TileBase, BuildingObjectBase> tileBaseToBuildingObject = new Dictionary<TileBase, BuildingObjectBase>();
     Dictionary<string, TileBase> guidToTileBase = new Dictionary<string, TileBase>();
     [SerializeField] string fileName = "tilemapData.json";
 
     private void Start()
     {
-        InitTilemaps();
         InitTileReferences();
     }
 
@@ -34,19 +32,20 @@ public class SaveHandler : MonoBehaviour
         }
     }
 
-    private void InitTilemaps()
-    {
-        Tilemap[] maps = FindObjectsOfType<Tilemap>();
-        foreach (var map in maps)
-        {
-            tilemaps.Add(map.name, map);
-        }
-    }
+    // private void InitTilemaps()
+    // {
+    //     Tilemap[] maps = FindObjectsOfType<Tilemap>();
+    //     foreach (var map in maps)
+    //     {
+    //         tilemaps.Add(map.name, map);
+    //     }
+    // }
 
     public void OnSave()
     {
         List<TilemapData> data = new List<TilemapData>();
-        foreach (var mapObj in tilemaps)
+        Level level = LevelManager.GetInstance().GetActiveLevel();
+        foreach (var mapObj in level.tilemaps)
         {
             TilemapData mapData = new TilemapData();
             mapData.key = mapObj.Key;
@@ -76,19 +75,20 @@ public class SaveHandler : MonoBehaviour
 
     public void OnLoad()
     {
+        Level level = LevelManager.GetInstance().GetActiveLevel();
         List<TilemapData> data = FileHandler.ReadListFromJSON<TilemapData>(fileName);
 
         foreach (var mapData in data)
         {
             // if key does NOT exist in dictionary skip it
-            if (!tilemaps.ContainsKey(mapData.key))
+            if (!level.tilemaps.ContainsKey(mapData.key))
             {
                 Debug.LogError("Found saved data for tilemap called '" + mapData.key + "', but Tilemap does not exist in scene.");
                 continue;
             }
 
             // get according map
-            var map = tilemaps[mapData.key];
+            var map = level.tilemaps[mapData.key];
 
             // clear map
             map.ClearAllTiles();

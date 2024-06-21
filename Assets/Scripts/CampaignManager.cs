@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CampaignManager : Singleton<CampaignManager>
 {
@@ -30,9 +31,9 @@ public class CampaignManager : Singleton<CampaignManager>
         return campaigns;
     }
 
-    public void LoadCampaign()
+    public void LoadCampaign(Campaign campaign)
     {
-
+        Debug.Log("Loading campaign: " + campaign.CampaignName);
     }
 }
 
