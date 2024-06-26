@@ -21,6 +21,10 @@ public class Level
         data = new List<TilemapData>();
         foreach (var mapObj in tilemaps)
         {
+            if (mapObj.Item1.Contains("Preview") || mapObj.Item1.Contains("Visible"))
+            {
+                continue;
+            }
             TilemapData mapData = new TilemapData();
             mapData.key = mapObj.Item1;
             BoundsInt boundsForThisMap = mapObj.Item2.cellBounds;
