@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class CampaignManager : Singleton<CampaignManager>
 {
-    private static Campaign activeCampaign;
+    public Campaign ActiveCampaign { get; private set; }
     [SerializeField] public GameObject campaignLoadScreen;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (activeCampaign == null)
+        if (ActiveCampaign == null)
         {
             campaignLoadScreen.gameObject.SetActive(true);
         }
@@ -38,13 +38,14 @@ public class CampaignManager : Singleton<CampaignManager>
     public void LoadCampaign(Campaign campaign)
     {
         Debug.Log("Loading campaign: " + campaign.CampaignName);
-        activeCampaign = campaign;
+        ActiveCampaign = campaign;
         campaignLoadScreen.gameObject.SetActive(false);
+        LevelManager.GetInstance().LoadLastModifiedLevel();
     }
 
-    internal static void AddLevel(Level level)
+    public void AddLevel(Level level)
     {
-        activeCampaign.Levels.Add(level);
+        ActiveCampaign.Levels.Add(level);
     }
 }
 

@@ -9,9 +9,11 @@ public class LevelManager : Singleton<LevelManager>
 {
     private Level activeLevel;
 
-    public void Start()
+    public void LoadLastModifiedLevel()
     {
-        if (activeLevel == null)
+        Campaign campaign = CampaignManager.GetInstance().ActiveCampaign;
+        List<Level> levels = campaign.Levels;
+        if (levels == null || levels.Count == 0)
         {
             InitializeLevel();
         }
@@ -25,7 +27,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void AddLevelToCampaign()
     {
-        CampaignManager.AddLevel(GetActiveLevel());
+        CampaignManager.GetInstance().AddLevel(GetActiveLevel());
     }
 
     public void InitializeLevel()
@@ -44,5 +46,6 @@ public class LevelManager : Singleton<LevelManager>
 public class Level
 {
     public Dictionary<string, Tilemap> tilemaps = new Dictionary<string, Tilemap>();
+    public DateTime LastModified { get; private set; }
 
 }
