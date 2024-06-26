@@ -15,11 +15,16 @@ public class LevelManager : Singleton<LevelManager>
         {
             InitializeLevel();
         }
+        Debug.Log(activeLevel);
     }
 
     public Level GetActiveLevel()
     {
         return activeLevel;
+    }
+
+    private void AddLevelToCampaign(){
+        CampaignManager.AddLevel(GetActiveLevel());
     }
 
     public void InitializeLevel()

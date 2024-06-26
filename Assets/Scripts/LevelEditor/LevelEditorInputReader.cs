@@ -15,7 +15,6 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
     public event Action<bool> MiddleClickEvent;
     public Vector2 MousePosition { get; private set; }
 
-
     private void OnEnable()
     {
         if (controls == null)
@@ -72,5 +71,15 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
         {
             MiddleClickEvent?.Invoke(false);
         }
+    }
+
+    public void DisableInput()
+    {
+        controls.LevelEditorPlayer.Disable();
+    }
+
+    public void EnableInput()
+    {
+        controls.LevelEditorPlayer.Enable();
     }
 }
