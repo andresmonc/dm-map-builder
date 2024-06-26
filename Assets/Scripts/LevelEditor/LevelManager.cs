@@ -17,6 +17,10 @@ public class LevelManager : Singleton<LevelManager>
         {
             InitializeLevel();
         }
+        else
+        {
+            // load previous memory level but first find the one with the most recent last modified
+        }
         Debug.Log(activeLevel);
     }
 
@@ -25,10 +29,6 @@ public class LevelManager : Singleton<LevelManager>
         return activeLevel;
     }
 
-    private void AddLevelToCampaign()
-    {
-        CampaignManager.GetInstance().AddLevel(GetActiveLevel());
-    }
 
     public void InitializeLevel()
     {
@@ -40,6 +40,7 @@ public class LevelManager : Singleton<LevelManager>
             level.tilemaps.Add(map.name, map);
         }
         activeLevel = level;
+        CampaignManager.GetInstance().AddLevel(activeLevel);
     }
 }
 

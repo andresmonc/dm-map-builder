@@ -60,5 +60,6 @@ public class Campaign
     {
         CampaignName = name;
         LastModified = "10/24/1993/06:59am";
+        Levels = new List<Level>();
     }
 }
