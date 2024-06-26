@@ -35,34 +35,9 @@ public class SaveHandler : MonoBehaviour
 
     public void OnSave()
     {
-        List<TilemapData> data = new List<TilemapData>();
         Level level = LevelManager.GetInstance().GetActiveLevel();
-        foreach (var mapObj in level.tilemaps)
-        {
-            TilemapData mapData = new TilemapData();
-            mapData.key = mapObj.Item1;
-            BoundsInt boundsForThisMap = mapObj.Item2.cellBounds;
-            for (int x = boundsForThisMap.xMin; x < boundsForThisMap.xMax; x++)
-            {
-                for (int y = boundsForThisMap.yMin; y < boundsForThisMap.yMax; y++)
-                {
-                    Vector3Int pos = new Vector3Int(x, y, 0);
-                    TileBase tile = mapObj.Item2.GetTile(pos);
-
-                    if (tile != null && tileBaseToBuildingObject.ContainsKey(tile))
-                    {
-                        String guid = tileBaseToBuildingObject[tile].name;
-                        TileInfo ti = new TileInfo(pos, guid);
-                        // Add "TileInfo" to "Tiles" List of "TilemapData"
-                        mapData.tiles.Add(ti);
-                    }
-                }
-            }
-            // Add "TilemapData" Object to List
-            data.Add(mapData);
-        }
-        FileHandler.SaveToJSON(data, fileName);
-
+        level.PrepareToSave(tileBaseToBuildingObject);
+        FileHandler.SaveToJSON(level.Data, fileName);
     }
 
     public void OnLoad()

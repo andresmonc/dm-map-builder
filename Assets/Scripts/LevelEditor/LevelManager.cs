@@ -43,12 +43,3 @@ public class LevelManager : Singleton<LevelManager>
         CampaignManager.GetInstance().AddLevel(activeLevel);
     }
 }
-
-[Serializable]
-public class Level
-{
-    public List<Tuple<string, Tilemap>> tilemaps = new List<Tuple<string, Tilemap>>();
-    // public Dictionary<string, Tilemap> tilemaps = new Dictionary<string, Tilemap>();
-    public DateTime LastModified { get; private set; }
-
-}
