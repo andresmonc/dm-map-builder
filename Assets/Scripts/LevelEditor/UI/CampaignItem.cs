@@ -12,8 +12,8 @@ public class CampaignItem : MonoBehaviour
 
     public void Initialize(Campaign campaign)
     {
-        campaignNameText.text = campaign.CampaignName;
-        lastModifiedText.text = campaign.LastModified;
+        campaignNameText.text = campaign.campaignName;
+        lastModifiedText.text = campaign.lastModified;
         this.campaign = campaign;
     }
 

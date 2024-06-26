@@ -37,7 +37,7 @@ public class CampaignManager : Singleton<CampaignManager>
 
     public void LoadCampaign(Campaign campaign)
     {
-        Debug.Log("Loading campaign: " + campaign.CampaignName);
+        Debug.Log("Loading campaign: " + campaign.campaignName);
         ActiveCampaign = campaign;
         campaignLoadScreen.gameObject.SetActive(false);
         LevelManager.GetInstance().LoadLastModifiedLevel();
@@ -45,22 +45,22 @@ public class CampaignManager : Singleton<CampaignManager>
 
     public void AddLevel(Level level)
     {
-        ActiveCampaign.Levels.Add(level);
+        ActiveCampaign.levels.Add(level);
     }
 }
 
 [Serializable]
 public class Campaign
 {
-    public string CampaignName { get; private set; }
-    public string LastModified { get; private set; }
+    public string campaignName;
+    public string lastModified;
 
-    public List<Level> Levels { get; private set; }
+    public List<Level> levels;
 
     public Campaign(string name)
     {
-        CampaignName = name;
-        LastModified = "10/24/1993/06:59am";
-        Levels = new List<Level>();
+        campaignName = name;
+        lastModified = "10/24/1993/06:59am";
+        levels = new List<Level>();
     }
 }

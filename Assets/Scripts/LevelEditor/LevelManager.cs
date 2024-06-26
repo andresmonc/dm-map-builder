@@ -12,7 +12,7 @@ public class LevelManager : Singleton<LevelManager>
     public void LoadLastModifiedLevel()
     {
         Campaign campaign = CampaignManager.GetInstance().ActiveCampaign;
-        List<Level> levels = campaign.Levels;
+        List<Level> levels = campaign.levels;
         if (levels == null || levels.Count == 0)
         {
             InitializeLevel();

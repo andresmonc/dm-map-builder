@@ -35,17 +35,18 @@ public class SaveHandler : MonoBehaviour
 
     public void OnSave()
     {
-        Level level = LevelManager.GetInstance().GetActiveLevel();
-        level.PrepareToSave(tileBaseToBuildingObject);
-        Debug.Log(level.data.Count);
-        Debug.Log(level.saveTime);
-        FileHandler.SaveToJSON(level, fileName);
+        Campaign campaign = CampaignManager.GetInstance().ActiveCampaign;
+        foreach (Level level in campaign.levels)
+        {
+            level.PrepareToSave(tileBaseToBuildingObject);
+        }
+        FileHandler.SaveToJSON(campaign, fileName);
     }
 
     public void OnLoad()
     {
         Level level = LevelManager.GetInstance().GetActiveLevel();
-        Level data = FileHandler.ReadFromJSON<Level>(fileName);
+        Level data = FileHandler.ReadFromJSON<Campaign>(fileName).levels[0];
         // For Faster lookups convert serializable List<Tuple>> to a dictionary 
         Dictionary<string, Tilemap> levelTileMapsDictionary = level.tilemaps.ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2);
 

@@ -18,7 +18,6 @@ public static class FileHandler
     {
         Debug.Log(GetPath(filename));
         string content = JsonUtility.ToJson(toSave);
-        Debug.Log(content);
         WriteFile(GetPath(filename), content);
     }
 
