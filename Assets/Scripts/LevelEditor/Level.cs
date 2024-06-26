@@ -1,21 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [Serializable]
 public class Level
 {
+    public string saveTime;
     [NonSerialized]
     public List<Tuple<string, Tilemap>> tilemaps = new List<Tuple<string, Tilemap>>();
-    public DateTime LastModified { get; private set; }
 
-    public List<TilemapData> Data { get; private set; }
+
+    public List<TilemapData> data;
 
     public void PrepareToSave(Dictionary<TileBase, BuildingObjectBase> tileBaseToBuildingObject)
     {
-        Data = new List<TilemapData>();
+        saveTime = DateTime.Now.ToString("g");
+        data = new List<TilemapData>();
         foreach (var mapObj in tilemaps)
         {
             TilemapData mapData = new TilemapData();
@@ -38,7 +41,7 @@ public class Level
                 }
             }
             // Add "TilemapData" Object to List
-            Data.Add(mapData);
+            data.Add(mapData);
         }
     }
 

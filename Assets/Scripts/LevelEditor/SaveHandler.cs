@@ -37,17 +37,19 @@ public class SaveHandler : MonoBehaviour
     {
         Level level = LevelManager.GetInstance().GetActiveLevel();
         level.PrepareToSave(tileBaseToBuildingObject);
-        FileHandler.SaveToJSON(level.Data, fileName);
+        Debug.Log(level.data.Count);
+        Debug.Log(level.saveTime);
+        FileHandler.SaveToJSON(level, fileName);
     }
 
     public void OnLoad()
     {
         Level level = LevelManager.GetInstance().GetActiveLevel();
-        List<TilemapData> data = FileHandler.ReadListFromJSON<TilemapData>(fileName);
+        Level data = FileHandler.ReadFromJSON<Level>(fileName);
         // For Faster lookups convert serializable List<Tuple>> to a dictionary 
         Dictionary<string, Tilemap> levelTileMapsDictionary = level.tilemaps.ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2);
 
-        foreach (var mapData in data)
+        foreach (var mapData in data.data)
         {
             // if key does NOT exist in dictionary skip it
             if (!levelTileMapsDictionary.ContainsKey(mapData.key))
