@@ -38,6 +38,8 @@ public class CampaignManager : Singleton<CampaignManager>
     public void LoadCampaign(Campaign campaign)
     {
         Debug.Log("Loading campaign: " + campaign.CampaignName);
+        activeCampaign = campaign;
+        campaignLoadScreen.gameObject.SetActive(false);
     }
 
     internal static void AddLevel(Level level)
