@@ -49,6 +49,7 @@ public class CampaignManager : Singleton<CampaignManager>
     }
 }
 
+[Serializable]
 public class Campaign
 {
     public string CampaignName { get; private set; }

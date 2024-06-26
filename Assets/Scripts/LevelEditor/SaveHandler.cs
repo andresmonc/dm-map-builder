@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -39,14 +40,14 @@ public class SaveHandler : MonoBehaviour
         foreach (var mapObj in level.tilemaps)
         {
             TilemapData mapData = new TilemapData();
-            mapData.key = mapObj.Key;
-            BoundsInt boundsForThisMap = mapObj.Value.cellBounds;
+            mapData.key = mapObj.Item1;
+            BoundsInt boundsForThisMap = mapObj.Item2.cellBounds;
             for (int x = boundsForThisMap.xMin; x < boundsForThisMap.xMax; x++)
             {
                 for (int y = boundsForThisMap.yMin; y < boundsForThisMap.yMax; y++)
                 {
                     Vector3Int pos = new Vector3Int(x, y, 0);
-                    TileBase tile = mapObj.Value.GetTile(pos);
+                    TileBase tile = mapObj.Item2.GetTile(pos);
 
                     if (tile != null && tileBaseToBuildingObject.ContainsKey(tile))
                     {
@@ -60,7 +61,7 @@ public class SaveHandler : MonoBehaviour
             // Add "TilemapData" Object to List
             data.Add(mapData);
         }
-        FileHandler.SaveToJSON<TilemapData>(data, fileName);
+        FileHandler.SaveToJSON(data, fileName);
 
     }
 
@@ -68,18 +69,20 @@ public class SaveHandler : MonoBehaviour
     {
         Level level = LevelManager.GetInstance().GetActiveLevel();
         List<TilemapData> data = FileHandler.ReadListFromJSON<TilemapData>(fileName);
+        // For Faster lookups convert serializable List<Tuple>> to a dictionary 
+        Dictionary<string, Tilemap> levelTileMapsDictionary = level.tilemaps.ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2);
 
         foreach (var mapData in data)
         {
             // if key does NOT exist in dictionary skip it
-            if (!level.tilemaps.ContainsKey(mapData.key))
+            if (!levelTileMapsDictionary.ContainsKey(mapData.key))
             {
                 Debug.LogError("Found saved data for tilemap called '" + mapData.key + "', but Tilemap does not exist in scene.");
                 continue;
             }
 
             // get according map
-            var map = level.tilemaps[mapData.key];
+            var map = levelTileMapsDictionary[mapData.key];
 
             // clear map
             map.ClearAllTiles();

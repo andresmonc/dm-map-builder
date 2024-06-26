@@ -37,16 +37,18 @@ public class LevelManager : Singleton<LevelManager>
         Level level = new Level();
         foreach (var map in maps)
         {
-            level.tilemaps.Add(map.name, map);
+            level.tilemaps.Add(Tuple.Create(map.name, map));
         }
         activeLevel = level;
         CampaignManager.GetInstance().AddLevel(activeLevel);
     }
 }
 
+[Serializable]
 public class Level
 {
-    public Dictionary<string, Tilemap> tilemaps = new Dictionary<string, Tilemap>();
+    public List<Tuple<string, Tilemap>> tilemaps = new List<Tuple<string, Tilemap>>();
+    // public Dictionary<string, Tilemap> tilemaps = new Dictionary<string, Tilemap>();
     public DateTime LastModified { get; private set; }
 
 }
