@@ -23,7 +23,8 @@ public class LevelManager : Singleton<LevelManager>
         return activeLevel;
     }
 
-    private void AddLevelToCampaign(){
+    private void AddLevelToCampaign()
+    {
         CampaignManager.AddLevel(GetActiveLevel());
     }
 
