@@ -18,12 +18,6 @@ public class CampaignManager : Singleton<CampaignManager>
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public List<Campaign> GetCampaigns()
     {
         List<Campaign> campaigns = new List<Campaign>

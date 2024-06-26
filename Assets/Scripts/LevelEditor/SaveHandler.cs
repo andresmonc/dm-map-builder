@@ -9,7 +9,6 @@ public class SaveHandler : MonoBehaviour
 {
     Dictionary<TileBase, BuildingObjectBase> tileBaseToBuildingObject = new Dictionary<TileBase, BuildingObjectBase>();
     Dictionary<string, TileBase> guidToTileBase = new Dictionary<string, TileBase>();
-    [SerializeField] string fileName = "tilemapData.json";
 
     private void Start()
     {
@@ -40,13 +39,13 @@ public class SaveHandler : MonoBehaviour
         {
             level.PrepareToSave(tileBaseToBuildingObject);
         }
-        FileHandler.SaveToJSON(campaign, fileName);
+        FileHandler.SaveToJSON(campaign, normalizeFileName(campaign.campaignName));
     }
 
     public void OnLoad()
     {
         Level level = LevelManager.GetInstance().GetActiveLevel();
-        Level data = FileHandler.ReadFromJSON<Campaign>(fileName).levels[0];
+        Level data = FileHandler.ReadFromJSON<Campaign>(normalizeFileName(CampaignManager.GetInstance().ActiveCampaign.campaignName)).levels[0];
         // For Faster lookups convert serializable List<Tuple>> to a dictionary 
         Dictionary<string, Tilemap> levelTileMapsDictionary = level.tilemaps.ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2);
 
@@ -82,6 +81,15 @@ public class SaveHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    private string normalizeFileName(string campaignName)
+    {
+        // Convert to lowercase
+        string normalized = campaignName.ToLower();
+        // Replace spaces with hyphens
+        normalized = normalized.Replace(' ', '-');
+        return normalized + ".json";
     }
 }
 

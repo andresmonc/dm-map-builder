@@ -19,6 +19,7 @@ public class LevelManager : Singleton<LevelManager>
         }
         else
         {
+            Debug.Log("ELSE HIT!");
             // load previous memory level but first find the one with the most recent last modified
         }
         Debug.Log(activeLevel);
