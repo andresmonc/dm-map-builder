@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 [Serializable]
 public class Level
 {
+    public string name;
     public string saveTime;
     [NonSerialized]
     public List<Tuple<string, Tilemap>> tilemaps = new List<Tuple<string, Tilemap>>();
@@ -48,5 +49,4 @@ public class Level
             data.Add(mapData);
         }
     }
-
 }
