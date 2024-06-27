@@ -31,7 +31,6 @@ public class CampaignManager : Singleton<CampaignManager>
 
     public void LoadCampaign(Campaign campaign)
     {
-        Debug.Log("Loading campaign: " + campaign.campaignName);
         ActiveCampaign = FileHandler.ReadFromJSON<Campaign>(SaveHandler.NormalizeFileName(campaign.campaignName));
         campaignLoadScreen.gameObject.SetActive(false);
         LevelManager.GetInstance().LoadLastModifiedLevel();

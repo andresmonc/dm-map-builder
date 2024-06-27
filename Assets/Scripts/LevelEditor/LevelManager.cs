@@ -22,7 +22,6 @@ public class LevelManager : Singleton<LevelManager>
         }
 
         // load previous memory level but first find the one with the most recent last modified
-        Debug.Log("ELSE HIT!");
         Level lastModifiedLevel = null;
         DateTime latestSaveTime = DateTime.MinValue;
         string format = "M/d/yyyy h:mm tt";
@@ -33,7 +32,6 @@ public class LevelManager : Singleton<LevelManager>
             {
                 continue;
             }
-            Debug.Log(level.saveTime);
             DateTime levelSaveTime = DateTime.ParseExact(level.saveTime, format, CultureInfo.InvariantCulture);
             if (levelSaveTime > latestSaveTime)
             {
@@ -43,7 +41,6 @@ public class LevelManager : Singleton<LevelManager>
         }
         activeLevel = lastModifiedLevel;
         SaveHandler.GetInstance().LoadLevel(lastModifiedLevel);
-        Debug.Log(activeLevel);
     }
 
     public Level GetActiveLevel()

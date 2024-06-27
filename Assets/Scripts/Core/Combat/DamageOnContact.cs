@@ -10,12 +10,10 @@ public class DamageOnContact : MonoBehaviour
         Rigidbody2D rigidBody = other.attachedRigidbody;
         if (rigidBody == null)
         {
-            Debug.Log("no rigid body!");
             return;
         }
         if (rigidBody.TryGetComponent<Health>(out Health health))
         {
-            Debug.Log("has health!");
             health.TakeDamage(damage);
         }
     }
