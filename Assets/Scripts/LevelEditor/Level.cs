@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [Serializable]
-public class Level
+public class Level : INetworkSerializable
 {
     public string name;
     public string saveTime;
@@ -15,6 +16,12 @@ public class Level
 
 
     public List<TilemapData> data;
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref name);
+        serializer.SerializeValue(ref saveTime);
+    }
 
     public void PrepareToSave(Dictionary<TileBase, BuildingObjectBase> tileBaseToBuildingObject)
     {

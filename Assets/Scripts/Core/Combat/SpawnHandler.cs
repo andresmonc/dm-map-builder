@@ -9,9 +9,7 @@ public class SpawnHandler : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private Player playerPrefab;
-    // [Header("Settings")]
-    // [SerializeField] private float keptCoinPercentage = 50f;
-
+    
     public override void OnNetworkSpawn()
     {
         DebugConsoleManager.Log("SpawnHandler Network Spawned!");
@@ -28,9 +26,22 @@ public class SpawnHandler : NetworkBehaviour
 
     private void HandleClientConnected(ulong clientId)
     {
-        Debug.Log($"New client connected: {clientId}");
         DebugConsoleManager.Log($"New client connected: {clientId}");
-        // Create ClientRpcParams to target the specific client
+        SendLevelToClientServerRpc(clientId);
+    }
+
+    [ClientRpc]
+    private void LoadActiveLevelClientRpc(Level level, ClientRpcParams clientRpcParams = default)
+    {
+        DebugConsoleManager.Log("Client RPC Received!");
+        var name = level.name;
+        DebugConsoleManager.Log("Active Level: " + name);
+    }
+
+    [ServerRpc]
+    private void SendLevelToClientServerRpc(ulong clientId)
+    {
+        Level activeLevel = LevelManager.GetInstance().GetActiveLevel();
         ClientRpcParams clientRpcParams = new ClientRpcParams
         {
             Send = new ClientRpcSendParams
@@ -38,14 +49,7 @@ public class SpawnHandler : NetworkBehaviour
                 TargetClientIds = new ulong[] { clientId }
             }
         };
-        // Call the ClientRPC method on the newly connected client
-        LoadActiveLevelClientRpc(clientRpcParams);
-    }
-
-    [ClientRpc]
-    private void LoadActiveLevelClientRpc(ClientRpcParams clientRpcParams = default)
-    {
-        DebugConsoleManager.Log("Client RPC Received!");
+        LoadActiveLevelClientRpc(activeLevel, clientRpcParams);
     }
 
     public override void OnNetworkDespawn()
