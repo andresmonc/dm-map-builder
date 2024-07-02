@@ -21,6 +21,7 @@ public class Level : INetworkSerializable
     {
         serializer.SerializeValue(ref name);
         serializer.SerializeValue(ref saveTime);
+
     }
 
     public void PrepareToSave(Dictionary<TileBase, BuildingObjectBase> tileBaseToBuildingObject)
@@ -55,5 +56,36 @@ public class Level : INetworkSerializable
             // Add "TilemapData" Object to List
             data.Add(mapData);
         }
+    }
+}
+
+[Serializable]
+public class TilemapData : INetworkSerializable
+{
+    public string key; // the key of your dictionary for the tilemap - here: the name of the map in the hierarchy
+    public List<TileInfo> tiles = new List<TileInfo>();
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        throw new NotImplementedException();
+    }
+}
+
+[Serializable]
+public class TileInfo : INetworkSerializable
+{
+    public string guidForBuildable;
+    public Vector3Int position;
+
+    public TileInfo(Vector3Int pos, string guid)
+    {
+        position = pos;
+        guidForBuildable = guid;
+    }
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref guidForBuildable);
+        serializer.SerializeValue(ref position);
     }
 }

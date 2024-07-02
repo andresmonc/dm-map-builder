@@ -9,7 +9,7 @@ public class SpawnHandler : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private Player playerPrefab;
-    
+
     public override void OnNetworkSpawn()
     {
         DebugConsoleManager.Log("SpawnHandler Network Spawned!");
@@ -34,8 +34,8 @@ public class SpawnHandler : NetworkBehaviour
     private void LoadActiveLevelClientRpc(Level level, ClientRpcParams clientRpcParams = default)
     {
         DebugConsoleManager.Log("Client RPC Received!");
-        var name = level.name;
-        DebugConsoleManager.Log("Active Level: " + name);
+        var saveTime = level.saveTime;
+        DebugConsoleManager.Log("Active Level Save Time: " + saveTime);
     }
 
     [ServerRpc]

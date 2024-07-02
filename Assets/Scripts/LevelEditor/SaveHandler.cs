@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -151,26 +152,5 @@ public class SaveHandler : Singleton<SaveHandler>
             }
         }
 
-    }
-}
-
-
-[Serializable]
-public class TilemapData
-{
-    public string key; // the key of your dictionary for the tilemap - here: the name of the map in the hierarchy
-    public List<TileInfo> tiles = new List<TileInfo>();
-}
-
-[Serializable]
-public class TileInfo
-{
-    public string guidForBuildable;
-    public Vector3Int position;
-
-    public TileInfo(Vector3Int pos, string guid)
-    {
-        position = pos;
-        guidForBuildable = guid;
     }
 }

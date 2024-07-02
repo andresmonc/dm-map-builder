@@ -47,6 +47,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public Level GetActiveLevel()
     {
+        Debug.Log("Active LEvel: " + activeLevel.name);
         return activeLevel;
     }
 
