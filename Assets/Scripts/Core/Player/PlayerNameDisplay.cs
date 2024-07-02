@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class PlayerNameDisplay : MonoBehaviour
 {
-    [SerializeField] private TankPlayer tankPlayer;
+    [SerializeField] private Player tankPlayer;
     [SerializeField] private TMP_Text displayNameText;
     private void Start()
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -12,6 +13,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LoadLastModifiedLevel()
     {
+        DebugConsoleManager.Log("Loading level...");
         Campaign campaign = CampaignManager.GetInstance().ActiveCampaign;
         List<Level> levels = campaign.levels;
         if (levels == null || levels.Count == 0)
@@ -47,7 +49,6 @@ public class LevelManager : Singleton<LevelManager>
     {
         return activeLevel;
     }
-
 
     public void InitializeLevel()
     {

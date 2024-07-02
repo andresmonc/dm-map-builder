@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CampaignManager : Singleton<CampaignManager>
+public class CampaignManager : NetworkSingleton<CampaignManager>
 {
     public Campaign ActiveCampaign { get; private set; }
     [SerializeField] public GameObject campaignLoadScreen;
@@ -12,7 +13,7 @@ public class CampaignManager : Singleton<CampaignManager>
     // Start is called before the first frame update
     void Start()
     {
-        if (ActiveCampaign == null)
+        if (ActiveCampaign == null && NetworkManager.Singleton.IsHost) 
         {
             campaignLoadScreen.gameObject.SetActive(true);
         }

@@ -37,14 +37,14 @@ public class Leaderboard : NetworkBehaviour
             }
         }
         if (!IsServer) { return; }
-        TankPlayer[] players = FindObjectsByType<TankPlayer>(FindObjectsSortMode.None);
-        foreach (TankPlayer player in players)
+        Player[] players = FindObjectsByType<Player>(FindObjectsSortMode.None);
+        foreach (Player player in players)
         {
             HandlePlayerSpawned(player);
         }
 
-        TankPlayer.OnPlayerSpawned += HandlePlayerSpawned;
-        TankPlayer.OnPlayerDespawned += HandlePlayerDespawned;
+        Player.OnPlayerSpawned += HandlePlayerSpawned;
+        Player.OnPlayerDespawned += HandlePlayerDespawned;
     }
 
     public override void OnNetworkDespawn()
@@ -54,11 +54,11 @@ public class Leaderboard : NetworkBehaviour
             leaderboardEntities.OnListChanged += HandleLeaderboardEntitiesChanged;
         }
         if (!IsServer) { return; }
-        TankPlayer.OnPlayerSpawned -= HandlePlayerSpawned;
-        TankPlayer.OnPlayerDespawned -= HandlePlayerDespawned;
+        Player.OnPlayerSpawned -= HandlePlayerSpawned;
+        Player.OnPlayerDespawned -= HandlePlayerDespawned;
     }
 
-    private void HandlePlayerSpawned(TankPlayer player)
+    private void HandlePlayerSpawned(Player player)
     {
         Debug.Log("Someone has spawned");
         leaderboardEntities.Add(new LeaderboardEntity
@@ -69,7 +69,7 @@ public class Leaderboard : NetworkBehaviour
         });
         player.Wallet.Coins.OnValueChanged += (oldCoins, newCoins) => HandleCoinsChanged(player.OwnerClientId, newCoins);
     }
-    private void HandlePlayerDespawned(TankPlayer player)
+    private void HandlePlayerDespawned(Player player)
     {
         if (leaderboardEntities == null) { return; }
         foreach (LeaderboardEntity entity in leaderboardEntities)

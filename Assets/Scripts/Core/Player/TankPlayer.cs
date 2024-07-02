@@ -6,7 +6,7 @@ using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-public class TankPlayer : NetworkBehaviour
+public class Player : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
@@ -21,8 +21,8 @@ public class TankPlayer : NetworkBehaviour
 
     private bool spawned = false;
 
-    public static event Action<TankPlayer> OnPlayerSpawned;
-    public static event Action<TankPlayer> OnPlayerDespawned;
+    public static event Action<Player> OnPlayerSpawned;
+    public static event Action<Player> OnPlayerDespawned;
 
     public NetworkVariable<FixedString32Bytes> PlayerName = new NetworkVariable<FixedString32Bytes>();
 

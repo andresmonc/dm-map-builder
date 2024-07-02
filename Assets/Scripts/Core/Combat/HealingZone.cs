@@ -16,7 +16,7 @@ public class HealingZone : NetworkBehaviour
     [SerializeField] private int coinsPerTick = 1;
     [SerializeField] private int healthPerTick = 1;
 
-    HashSet<TankPlayer> playersInZone = new HashSet<TankPlayer>();
+    HashSet<Player> playersInZone = new HashSet<Player>();
 
     private NetworkVariable<int> HealPower = new NetworkVariable<int>();
 
@@ -39,7 +39,7 @@ public class HealingZone : NetworkBehaviour
         tickTimer += Time.deltaTime;
         if (tickTimer >= 1 / healTickRate)
         {
-            foreach (TankPlayer player in playersInZone)
+            foreach (Player player in playersInZone)
             {
                 Debug.Log("healing a player");
                 if (HealPower.Value == 0)
@@ -96,7 +96,7 @@ public class HealingZone : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!IsServer) { return; }
-        if (other.attachedRigidbody.TryGetComponent<TankPlayer>(out TankPlayer tankPlayer))
+        if (other.attachedRigidbody.TryGetComponent<Player>(out Player tankPlayer))
         {
             Debug.Log("adding aplayer to zone");
             playersInZone.Add(tankPlayer);
@@ -107,7 +107,7 @@ public class HealingZone : NetworkBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!IsServer) { return; }
-        if (other.attachedRigidbody.TryGetComponent<TankPlayer>(out TankPlayer tankPlayer))
+        if (other.attachedRigidbody.TryGetComponent<Player>(out Player tankPlayer))
         {
             playersInZone.Remove(tankPlayer);
             Debug.Log(playersInZone.ToString());
