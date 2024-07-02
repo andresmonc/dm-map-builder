@@ -13,7 +13,7 @@ public class CampaignManager : Singleton<CampaignManager>
     // Start is called before the first frame update
     void Start()
     {
-        if (ActiveCampaign == null && NetworkManager.Singleton.IsHost)
+        if (ActiveCampaign == null && (!NetworkManager.Singleton.IsListening ||NetworkManager.Singleton.IsHost))
         {
             campaignLoadScreen.gameObject.SetActive(true);
         }

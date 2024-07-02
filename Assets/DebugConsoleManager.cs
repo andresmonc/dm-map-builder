@@ -16,6 +16,10 @@ public class DebugConsoleManager : Singleton<DebugConsoleManager>
 
     private void InternalLog(string message)
     {
+        if (console == null)
+        {
+            return;
+        }
         console.text += "\n" + "> " + message;
     }
 
