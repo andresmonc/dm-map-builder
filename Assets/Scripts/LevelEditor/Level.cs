@@ -14,14 +14,34 @@ public class Level : INetworkSerializable
     [NonSerialized]
     public List<Tuple<string, Tilemap>> tilemaps = new List<Tuple<string, Tilemap>>();
 
-
     public List<TilemapData> data;
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
+        this.PrepareToSave(SaveHandler.tileBaseToBuildingObject);
         serializer.SerializeValue(ref name);
         serializer.SerializeValue(ref saveTime);
 
+        int count = data.Count;
+        serializer.SerializeValue(ref count);
+
+        if (serializer.IsReader)
+        {
+            data.Clear();
+            for (int i = 0; i < count; i++)
+            {
+                TilemapData tilemapData = new TilemapData();
+                tilemapData.NetworkSerialize(serializer);
+                data.Add(tilemapData);
+            }
+        }
+        else
+        {
+            foreach (TilemapData tilemapData in data)
+            {
+                tilemapData.NetworkSerialize(serializer);
+            }
+        }
     }
 
     public void PrepareToSave(Dictionary<TileBase, BuildingObjectBase> tileBaseToBuildingObject)
@@ -67,7 +87,26 @@ public class TilemapData : INetworkSerializable
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
-        throw new NotImplementedException();
+        serializer.SerializeValue(ref key);
+        int count = tiles.Count;
+        serializer.SerializeValue(ref count);
+        if (serializer.IsReader)
+        {
+            tiles.Clear();
+            for (int i = 0; i < count; i++)
+            {
+                TileInfo tile = new TileInfo(Vector3Int.zero, string.Empty);
+                tile.NetworkSerialize(serializer);
+                tiles.Add(tile);
+            }
+        }
+        else
+        {
+            foreach (TileInfo tile in tiles)
+            {
+                tile.NetworkSerialize(serializer);
+            }
+        }
     }
 }
 

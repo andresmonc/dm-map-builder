@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class SaveHandler : Singleton<SaveHandler>
 {
-    Dictionary<TileBase, BuildingObjectBase> tileBaseToBuildingObject = new Dictionary<TileBase, BuildingObjectBase>();
+    public static Dictionary<TileBase, BuildingObjectBase> tileBaseToBuildingObject = new Dictionary<TileBase, BuildingObjectBase>();
     Dictionary<string, TileBase> guidToTileBase = new Dictionary<string, TileBase>();
 
     private void Start()

@@ -76,4 +76,9 @@ public class LevelManager : Singleton<LevelManager>
         }
 
     }
+
+    internal void LoadLevel(Level level)
+    {
+        throw new NotImplementedException();
+    }
 }
