@@ -47,7 +47,6 @@ public class LevelManager : Singleton<LevelManager>
 
     public Level GetActiveLevel()
     {
-        Debug.Log("Active LEvel: " + activeLevel.name);
         return activeLevel;
     }
 
@@ -69,16 +68,27 @@ public class LevelManager : Singleton<LevelManager>
         Tilemap[] maps = FindObjectsOfType<Tilemap>();
         foreach (Level level in levels)
         {
-            foreach (var map in maps)
-            {
-                level.tilemaps.Add(Tuple.Create(map.name, map));
-            }
+            InitializeLevel(level);
         }
 
     }
 
-    internal void LoadLevel(Level level)
+    public void InitializeLevel(Level level, Tilemap[] maps = null)
     {
-        throw new NotImplementedException();
+        if (maps == null)
+        {
+            maps = FindObjectsOfType<Tilemap>();
+        }
+        foreach (var map in maps)
+        {
+            level.tilemaps.Add(Tuple.Create(map.name, map));
+        }
+    }
+
+    public void LoadLevel(Level level)
+    {
+        InitializeLevel(level);
+        activeLevel = level;
+        SaveHandler.GetInstance().LoadLevel(level);
     }
 }

@@ -34,6 +34,7 @@ public class SpawnHandler : NetworkBehaviour
     private void LoadActiveLevelClientRpc(Level level, ClientRpcParams clientRpcParams = default)
     {
         DebugConsoleManager.Log("Client RPC Received!");
+        DebugConsoleManager.Log(level.saveTime);
         LevelManager.GetInstance().LoadLevel(level);
     }
 
