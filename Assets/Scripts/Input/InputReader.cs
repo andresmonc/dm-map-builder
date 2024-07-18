@@ -11,6 +11,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action<Vector2> MoveEvent;
     public Vector2 AimPositon { get; private set; }
     private Controls controls;
+    public event Action<float> ScrollEvent;
 
     private void OnEnable()
     {
@@ -47,5 +48,18 @@ public class InputReader : ScriptableObject, IPlayerActions
     public void OnAim(InputAction.CallbackContext context)
     {
         AimPositon = context.ReadValue<Vector2>();
+    }
+
+    public void OnMouseScroll(InputAction.CallbackContext context)
+    {
+        float value = context.ReadValue<Vector2>().y;
+        if (value > 0)
+        {
+            ScrollEvent?.Invoke(1);
+        }
+        else if (value < 0)
+        {
+            ScrollEvent?.Invoke(-1);
+        }
     }
 }
