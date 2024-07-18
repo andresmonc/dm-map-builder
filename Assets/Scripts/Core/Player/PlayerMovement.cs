@@ -11,8 +11,12 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Transform bodyTransform;
     [SerializeField] private Rigidbody2D rbody;
     [Header("Movement Settings")]
-    [SerializeField] private float movementSpeed = 4f;
+    [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float turningRate = 30f;
+
+    private bool moving = false;
+    private Vector2 targetPosition;
+    private Vector2 lastPosition;
 
     private Vector2 previousMovementVector;
 
@@ -40,7 +44,8 @@ public class PlayerMovement : NetworkBehaviour
         {
             return;
         }
-        bodyTransform.Rotate(0f, 0f, previousMovementVector.x * -turningRate * Time.deltaTime);
+        // rotate body here??
+        // bodyTransform.Rotate(0f, 0f, previousMovementVector.x * -turningRate * Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -49,44 +54,30 @@ public class PlayerMovement : NetworkBehaviour
         {
             return;
         }
-        // Calculate current position
         Vector2 currentPos = rbody.position;
-
-        // Calculate desired movement based on input
-        Vector2 desiredMovement = Vector2.zero;
-
-        if (previousMovementVector.x == 1)
+        if (moving && currentPos == lastPosition)
         {
-            // Move right
-            desiredMovement = Vector2.right;
+            moving = false;
+            targetPosition = currentPos;
         }
-        else if (previousMovementVector.x == -1)
+        if (!moving && previousMovementVector != Vector2.zero)
         {
-            // Move left
-            desiredMovement = Vector2.left;
+            targetPosition = previousMovementVector + currentPos;
+            moving = true;
         }
-        else if (previousMovementVector.y == 1)
+        if (moving)
         {
-            // Move up
-            desiredMovement = Vector2.up;
+            Vector2 newPos = Vector2.Lerp(currentPos, targetPosition, movementSpeed * Time.fixedDeltaTime);
+            if (Vector2.Distance(newPos, targetPosition) <= 0.05f)
+            {
+                newPos = targetPosition;
+                moving = false;
+            }
+            rbody.MovePosition(newPos);
         }
-        else if (previousMovementVector.y == -1)
-        {
-            // Move down
-            desiredMovement = Vector2.down;
-        }
+        // Update lastPosition
+        lastPosition = currentPos;
 
-        // Calculate new position by snapping to nearest tile grid position
-        Vector2 newPos = new Vector2(
-            Mathf.Round(currentPos.x / 1f) * 1f,
-            Mathf.Round(currentPos.y / 1f) * 1f
-        );
-
-        // Apply desired movement
-        newPos += desiredMovement * 1f;
-
-        // Apply the snapped position to Rigidbody2D
-        rbody.MovePosition(newPos);
     }
 
     private void HandleMove(Vector2 vector)
