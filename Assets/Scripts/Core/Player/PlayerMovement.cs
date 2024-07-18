@@ -49,7 +49,44 @@ public class PlayerMovement : NetworkBehaviour
         {
             return;
         }
-        rbody.velocity = (Vector2)bodyTransform.up * previousMovementVector.y * movementSpeed;
+        // Calculate current position
+        Vector2 currentPos = rbody.position;
+
+        // Calculate desired movement based on input
+        Vector2 desiredMovement = Vector2.zero;
+
+        if (previousMovementVector.x == 1)
+        {
+            // Move right
+            desiredMovement = Vector2.right;
+        }
+        else if (previousMovementVector.x == -1)
+        {
+            // Move left
+            desiredMovement = Vector2.left;
+        }
+        else if (previousMovementVector.y == 1)
+        {
+            // Move up
+            desiredMovement = Vector2.up;
+        }
+        else if (previousMovementVector.y == -1)
+        {
+            // Move down
+            desiredMovement = Vector2.down;
+        }
+
+        // Calculate new position by snapping to nearest tile grid position
+        Vector2 newPos = new Vector2(
+            Mathf.Round(currentPos.x / 1f) * 1f,
+            Mathf.Round(currentPos.y / 1f) * 1f
+        );
+
+        // Apply desired movement
+        newPos += desiredMovement * 1f;
+
+        // Apply the snapped position to Rigidbody2D
+        rbody.MovePosition(newPos);
     }
 
     private void HandleMove(Vector2 vector)
