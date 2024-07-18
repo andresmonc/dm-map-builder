@@ -12,11 +12,9 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Rigidbody2D rbody;
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed = 5f;
-
     private bool moving = false;
     private Vector2 targetPosition;
     private Vector2 lastPosition;
-
     private Vector2 previousMovementVector;
 
     public override void OnNetworkSpawn()
