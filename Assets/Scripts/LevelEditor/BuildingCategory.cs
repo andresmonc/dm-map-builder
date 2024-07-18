@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,10 @@ public class BuildingCategory : ScriptableObject
     [field: SerializeField] public string TileMapName { get; private set; }
     [field: SerializeField] public PlaceType PlaceType { get; private set; }
     [field: SerializeField] public int SortingOrder { get; private set; }
+    [field: SerializeField] public bool ColliderEnabled { get; private set; }
+
     public Tilemap Tilemap { get; set; }
+
 }
 
 public enum PlaceType
