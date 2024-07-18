@@ -62,6 +62,11 @@ public class PlayerMovement : NetworkBehaviour
         if (!moving && previousMovementVector != Vector2.zero)
         {
             targetPosition = previousMovementVector + currentPos;
+            // Round to nearest half to remain centered in tiles
+            targetPosition.x = (float)Math.Round(targetPosition.x * 2) / 2;
+            targetPosition.y = (float)Math.Round(targetPosition.y * 2) / 2;
+
+            Debug.Log(targetPosition);
             moving = true;
         }
         if (moving)
