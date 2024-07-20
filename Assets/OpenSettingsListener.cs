@@ -14,9 +14,7 @@ public class OpenSettingsListener : MonoBehaviour
 
     private void HandleOpenSettings(bool obj)
     {
-        // TODO: will components keep working after inactivated?
         this.gameObject.SetActive(!this.gameObject.activeSelf);
-        Debug.Log("Settings visibility toggled");
     }
 
     // TODO: unsubscribe correctly
