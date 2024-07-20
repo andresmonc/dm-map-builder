@@ -220,9 +220,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Mouse Middle",
+                    "name": "Panning",
                     "type": "Button",
                     "id": "858f551f-b71e-4986-adec-44ac206d5a04",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Open Settings",
+                    "type": "Button",
+                    "id": "5238c3c3-baa1-4d7c-87b8-1eb6a6e9c32e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -281,7 +290,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard & Mouse",
-                    "action": "Mouse Middle",
+                    "action": "Panning",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f22e59b5-c5de-476d-bd44-cae80adae0e9",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open Settings",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

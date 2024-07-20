@@ -13,6 +13,8 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
 
     public event Action<float> ScrollEvent;
     public event Action<bool> MiddleClickEvent;
+    public event Action<bool> OpenSettingsEvent;
+
     public Vector2 MousePosition { get; private set; }
 
     private void OnEnable()
@@ -61,7 +63,7 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
         }
     }
 
-    public void OnMouseMiddle(InputAction.CallbackContext context)
+    public void OnPanning(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -81,5 +83,10 @@ public class LevelEditorInputReader : ScriptableObject, ILevelEditorPlayerAction
     public void EnableInput()
     {
         controls.LevelEditorPlayer.Enable();
+    }
+
+    public void OnOpenSettings(InputAction.CallbackContext context)
+    {
+        OpenSettingsEvent?.Invoke(true);
     }
 }

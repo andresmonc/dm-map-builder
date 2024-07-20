@@ -242,9 +242,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Mouse Middle"",
+                    ""name"": ""Panning"",
                     ""type"": ""Button"",
                     ""id"": ""858f551f-b71e-4986-adec-44ac206d5a04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Open Settings"",
+                    ""type"": ""Button"",
+                    ""id"": ""5238c3c3-baa1-4d7c-87b8-1eb6a6e9c32e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -303,7 +312,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyBoard & Mouse"",
-                    ""action"": ""Mouse Middle"",
+                    ""action"": ""Panning"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f22e59b5-c5de-476d-bd44-cae80adae0e9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open Settings"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -340,7 +360,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_LevelEditorPlayer_MouseRightClick = m_LevelEditorPlayer.FindAction("Mouse Right Click", throwIfNotFound: true);
         m_LevelEditorPlayer_MousePosition = m_LevelEditorPlayer.FindAction("Mouse Position", throwIfNotFound: true);
         m_LevelEditorPlayer_MouseScroll = m_LevelEditorPlayer.FindAction("Mouse Scroll", throwIfNotFound: true);
-        m_LevelEditorPlayer_MouseMiddle = m_LevelEditorPlayer.FindAction("Mouse Middle", throwIfNotFound: true);
+        m_LevelEditorPlayer_Panning = m_LevelEditorPlayer.FindAction("Panning", throwIfNotFound: true);
+        m_LevelEditorPlayer_OpenSettings = m_LevelEditorPlayer.FindAction("Open Settings", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -468,7 +489,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_LevelEditorPlayer_MouseRightClick;
     private readonly InputAction m_LevelEditorPlayer_MousePosition;
     private readonly InputAction m_LevelEditorPlayer_MouseScroll;
-    private readonly InputAction m_LevelEditorPlayer_MouseMiddle;
+    private readonly InputAction m_LevelEditorPlayer_Panning;
+    private readonly InputAction m_LevelEditorPlayer_OpenSettings;
     public struct LevelEditorPlayerActions
     {
         private @Controls m_Wrapper;
@@ -477,7 +499,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @MouseRightClick => m_Wrapper.m_LevelEditorPlayer_MouseRightClick;
         public InputAction @MousePosition => m_Wrapper.m_LevelEditorPlayer_MousePosition;
         public InputAction @MouseScroll => m_Wrapper.m_LevelEditorPlayer_MouseScroll;
-        public InputAction @MouseMiddle => m_Wrapper.m_LevelEditorPlayer_MouseMiddle;
+        public InputAction @Panning => m_Wrapper.m_LevelEditorPlayer_Panning;
+        public InputAction @OpenSettings => m_Wrapper.m_LevelEditorPlayer_OpenSettings;
         public InputActionMap Get() { return m_Wrapper.m_LevelEditorPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -499,9 +522,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MouseScroll.started += instance.OnMouseScroll;
             @MouseScroll.performed += instance.OnMouseScroll;
             @MouseScroll.canceled += instance.OnMouseScroll;
-            @MouseMiddle.started += instance.OnMouseMiddle;
-            @MouseMiddle.performed += instance.OnMouseMiddle;
-            @MouseMiddle.canceled += instance.OnMouseMiddle;
+            @Panning.started += instance.OnPanning;
+            @Panning.performed += instance.OnPanning;
+            @Panning.canceled += instance.OnPanning;
+            @OpenSettings.started += instance.OnOpenSettings;
+            @OpenSettings.performed += instance.OnOpenSettings;
+            @OpenSettings.canceled += instance.OnOpenSettings;
         }
 
         private void UnregisterCallbacks(ILevelEditorPlayerActions instance)
@@ -518,9 +544,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MouseScroll.started -= instance.OnMouseScroll;
             @MouseScroll.performed -= instance.OnMouseScroll;
             @MouseScroll.canceled -= instance.OnMouseScroll;
-            @MouseMiddle.started -= instance.OnMouseMiddle;
-            @MouseMiddle.performed -= instance.OnMouseMiddle;
-            @MouseMiddle.canceled -= instance.OnMouseMiddle;
+            @Panning.started -= instance.OnPanning;
+            @Panning.performed -= instance.OnPanning;
+            @Panning.canceled -= instance.OnPanning;
+            @OpenSettings.started -= instance.OnOpenSettings;
+            @OpenSettings.performed -= instance.OnOpenSettings;
+            @OpenSettings.canceled -= instance.OnOpenSettings;
         }
 
         public void RemoveCallbacks(ILevelEditorPlayerActions instance)
@@ -559,6 +588,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMouseRightClick(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
-        void OnMouseMiddle(InputAction.CallbackContext context);
+        void OnPanning(InputAction.CallbackContext context);
+        void OnOpenSettings(InputAction.CallbackContext context);
     }
 }
