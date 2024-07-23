@@ -6,6 +6,6 @@ public class ExitButtonHandler : MonoBehaviour
 {
     public void CloseGame()
     {
-        // TODO: Implement me
+        Application.Quit();
     }
 }
