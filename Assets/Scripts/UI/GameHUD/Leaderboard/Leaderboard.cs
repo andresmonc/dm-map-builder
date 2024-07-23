@@ -74,7 +74,8 @@ public class Leaderboard : NetworkBehaviour
         if (leaderboardEntities == null) { return; }
         foreach (LeaderboardEntity entity in leaderboardEntities)
         {
-            if (entity.ClientId != player.OwnerClientId)
+            // reversed this but not sure if it broke it?
+            if (entity.ClientId == player.OwnerClientId)
             {
                 continue;
             }

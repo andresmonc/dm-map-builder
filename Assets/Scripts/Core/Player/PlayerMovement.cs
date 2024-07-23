@@ -12,11 +12,9 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Rigidbody2D rbody;
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed = 5f;
-
     private bool moving = false;
     private Vector2 targetPosition;
     private Vector2 lastPosition;
-
     private Vector2 previousMovementVector;
 
     public override void OnNetworkSpawn()
@@ -62,6 +60,9 @@ public class PlayerMovement : NetworkBehaviour
         if (!moving && previousMovementVector != Vector2.zero)
         {
             targetPosition = previousMovementVector + currentPos;
+            // Round to nearest half to remain centered in tiles
+            targetPosition.x = (float)Math.Round(targetPosition.x * 2) / 2;
+            targetPosition.y = (float)Math.Round(targetPosition.y * 2) / 2;
             moving = true;
         }
         if (moving)

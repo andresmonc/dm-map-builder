@@ -239,6 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7857532675835094574}
   - component: {fileID: 5403967476259891581}
+  - component: {fileID: 2465337918110421411}
   m_Layer: 0
   m_Name: Follow Camera
   m_TagString: Untagged
@@ -301,6 +302,23 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 5995389702883859441}
+--- !u!114 &2465337918110421411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081101095758036788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94438812764e1648892c67e28d80acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: 186dc9157b4c625449edcdb9b0275b53, type: 2}
+  cinemachineVirtualCamera: {fileID: 5403967476259891581}
+  zoomSpeed: 2
+  minZoom: 2
+  maxZoom: 10
 --- !u!1 &4702101079453134529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1168,6 @@ MonoBehaviour:
   bodyTransform: {fileID: 9148177071071712762}
   rbody: {fileID: 4363143796844857253}
   movementSpeed: 4
-  turningRate: 300
 --- !u!114 &674754052333807459
 MonoBehaviour:
   m_ObjectHideFlags: 0

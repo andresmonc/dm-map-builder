@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Mouse Scroll",
+                    "type": "Value",
+                    "id": "f818266f-8ce1-470c-88bc-a8270edbaa81",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Primary Fire",
                     "type": "Button",
                     "id": "82ecf0cb-be59-4d2b-ae3e-7ef407b4620f",
@@ -174,6 +183,17 @@
                     "processors": "",
                     "groups": "KeyBoard & Mouse",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "229357c2-b07e-4ff1-aa75-346eae5d8a68",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
