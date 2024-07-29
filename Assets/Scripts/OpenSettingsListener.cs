@@ -6,15 +6,24 @@ using UnityEngine;
 
 public class OpenSettingsListener : MonoBehaviour
 {
-    [SerializeField] LevelEditorInputReader LevelEditorInputReader;
+    [SerializeField] LevelEditorInputReader levelEditorInputReader;
+    [SerializeField] InputReader playerInputReader;
+
     public void Start()
     {
-        LevelEditorInputReader.OpenSettingsEvent += HandleOpenSettings;
+        if (levelEditorInputReader != null)
+        {
+            levelEditorInputReader.OpenSettingsEvent += HandleOpenSettings;
+        }
+        else if (playerInputReader != null)
+        {
+            playerInputReader.OpenSettingsEvent += HandleOpenSettings;
+        }
     }
 
     private void HandleOpenSettings(bool obj)
     {
-        this.gameObject.SetActive(!this.gameObject.activeSelf);
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 
     // TODO: unsubscribe correctly

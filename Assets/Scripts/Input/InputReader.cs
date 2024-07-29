@@ -12,6 +12,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public Vector2 AimPositon { get; private set; }
     private Controls controls;
     public event Action<float> ScrollEvent;
+    public event Action<bool> OpenSettingsEvent;
 
     private void OnEnable()
     {
@@ -57,5 +58,10 @@ public class InputReader : ScriptableObject, IPlayerActions
         {
             ScrollEvent?.Invoke(-1);
         }
+    }
+
+    public void OnOpenSettings(InputAction.CallbackContext context)
+    {
+        OpenSettingsEvent?.Invoke(true);
     }
 }

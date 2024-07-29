@@ -62,6 +62,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Open Settings"",
+                    ""type"": ""Button"",
+                    ""id"": ""c5ad6d4b-024b-4f0b-971c-27df9449784d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -216,6 +225,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Mouse Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""efa5002f-3044-4000-89ab-ee0776e8603f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open Settings"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -375,6 +395,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_MouseScroll = m_Player.FindAction("Mouse Scroll", throwIfNotFound: true);
         m_Player_PrimaryFire = m_Player.FindAction("Primary Fire", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_OpenSettings = m_Player.FindAction("Open Settings", throwIfNotFound: true);
         // LevelEditorPlayer
         m_LevelEditorPlayer = asset.FindActionMap("LevelEditorPlayer", throwIfNotFound: true);
         m_LevelEditorPlayer_MouseLeftClick = m_LevelEditorPlayer.FindAction("Mouse Left Click", throwIfNotFound: true);
@@ -448,6 +469,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MouseScroll;
     private readonly InputAction m_Player_PrimaryFire;
     private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_OpenSettings;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -456,6 +478,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @MouseScroll => m_Wrapper.m_Player_MouseScroll;
         public InputAction @PrimaryFire => m_Wrapper.m_Player_PrimaryFire;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @OpenSettings => m_Wrapper.m_Player_OpenSettings;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -477,6 +500,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @OpenSettings.started += instance.OnOpenSettings;
+            @OpenSettings.performed += instance.OnOpenSettings;
+            @OpenSettings.canceled += instance.OnOpenSettings;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -493,6 +519,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @OpenSettings.started -= instance.OnOpenSettings;
+            @OpenSettings.performed -= instance.OnOpenSettings;
+            @OpenSettings.canceled -= instance.OnOpenSettings;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -611,6 +640,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMouseScroll(InputAction.CallbackContext context);
         void OnPrimaryFire(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnOpenSettings(InputAction.CallbackContext context);
     }
     public interface ILevelEditorPlayerActions
     {
